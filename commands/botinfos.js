@@ -8,8 +8,8 @@ module.exports = {
         .setDescription('About the Bot <3'),
     async execute(interaction, client) {
         const embed = new client.discord.MessageEmbed()
-            .setColor('6d6ee8')
-            .setDescription('An Advanced Ticket Bot <3')
+            .setColor('RANDOM')
+            .setDescription('Made Only For EliteX ... Made with 💗')
             .setFooter(client.config.footerText, client.user.avatarURL())
             .setTimestamp();
 

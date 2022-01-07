@@ -50,12 +50,27 @@ module.exports = {
                         .addOptions([{
                                 label: 'OOC',
                                 value: 'Ooc',
-                                emoji: '🙎',
+                                emoji: '📝',
                             },
                             {
                                 label: 'BUGS',
                                 value: 'Bugs',
                                 emoji: '🐛',
+                            },
+                            {
+                                label: 'SUPPORTERS PACK',
+                                value: 'Supporters',
+                                emoji: '💎',
+                            },
+                            {
+                                label: 'PLANNED RP',
+                                value: 'Planned',
+                                emoji: '📓',
+                            },
+                            {
+                                label: 'CHARACTER ISSUE',
+                                value: 'Character',
+                                emoji: '🪲',
                             },
                             {
                                 label: 'OTHERS',
@@ -115,6 +130,21 @@ module.exports = {
                         if (i.values[0] == 'Bugs') {
                             c.edit({
                                 parent: client.config.parentBugs
+                            });
+                        };
+                        if (i.values[0] == 'Supporters') {
+                            c.edit({
+                                parent: client.config.parentSupporters
+                            });
+                        };
+                        if (i.values[0] == 'Planned') {
+                            c.edit({
+                                parent: client.config.parentPlanned
+                            });
+                        };
+                        if (i.values[0] == 'Character') {
+                            c.edit({
+                                parent: client.config.parentCharacter
                             });
                         };
                         if (i.values[0] == 'Others') {
@@ -264,10 +294,10 @@ module.exports = {
 
                         client.channels.cache.get(client.config.logsTicket).send({
                             embeds: [embed]
-                        });
-                        client.users.cache.get(chan.topic).send({
-                            embeds: [embed2]
-                        }).catch();
+                        }).catch(); //remove *.catch();* -> if you are removing 298,299 & 300 comments
+                        //client.users.cache.get(chan.topic).send({      TO SEND USER DM
+                        //    embeds: [embed2]
+                        //}).catch();
                         chan.send('Deleting the channel ...');
 
                         setTimeout(() => {
