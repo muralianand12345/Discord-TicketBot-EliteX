@@ -28,7 +28,7 @@ Advanced Ticket Bot | Discordjs@13 | slash command | components | interactions
     "ticketChannel": "",
     "TagMember": "everyone",
 
-    "footerText": "EliteX RolePlay"
+    "footerText": ""
 
 }
 
