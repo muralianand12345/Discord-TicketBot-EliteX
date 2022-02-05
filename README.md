@@ -1,38 +1,43 @@
 # Discord_TicketBot
-Advanced Ticket Bot | Discordjs@13 | slash command | components 
+Advanced Ticket Bot | Discordjs@13 | slash command | components | interactions
 
 # config.json
 
     {
+    "ownerID": "",
+    "clientId": "",
+
+
+    "parentOpened": "",
+    "parentOOC": "",
+    "parentBugs": "",
+    "parentOthers": "",
+    "parentSupporters": "",
+    "parentPlanned": "",
+    "parentCharacter": "",
+
+    "announceChannel":"",
+
+
+    "roleSupport": "",
+
+
+    "logsTicket": "",
+    "errorLog": "",
     
-    "clientId": "905841414401851404", **BOT CLIENT ID**
+    "ticketChannel": "",
+    "TagMember": "everyone",
 
-    **CREATE A CATEGORY IN THE SERVER AND COPY THE ID**
+    "footerText": "EliteX RolePlay"
 
-    "parentOpened": "919627403876249630", FOR PRIMARY TICKET 
-    "parentOOC": "919633949066674249", FOR OOC CATEGORY
-    "parentBugs": "919633865402888313", FOR BUGS CATEGORY
-    "parentOthers": "919634090238570546", FOR OTHERS
-
-    **TICKET SUPPORT ROLE ID**
-    "roleSupport": "864144712126169128",
-
-    **TICKET LOG CHANNEL ID**
-    "logsTicket": "919628107391041576",
-
-    **TICKET REACTION CHANNEL**
-    "ticketChannel": "919628207072886785",
-
-    **SERVER NAME/FOOTER FOR THE EMBED**
-    "footerText": "Murali's Empire"
-    }
+}
 
 
 ---------------------------------------------
 
 # Versions :-
 
-Discord - version 13
+Discord - version 13.2.0
 Node - version 16.13.1
 
 ---------------------------------------------
