@@ -35,14 +35,19 @@ Advanced Ticket Bot | Discordjs@13 | slash command | components | interactions
 
 ---------------------------------------------
 
-# Versions :-
+# ENV
+TOKEN= <your beautiful discord bot>
+
+---------------------------------------------
+
+# Versions 
 
 Discord - version 13.2.0
 Node - version 16.13.1
 
 ---------------------------------------------
 
-# Installation :-
+# Installation 
 
 npm i **INSTALLS ALL NECESSARY PACKAGES**
 node for-text.js **SENDS MESSAGES IN THE CHANNEL** (OPTIONAL) Note: Change the values before running the command
@@ -51,7 +56,7 @@ node index.js **RUN BOT**
 
 ---------------------------------------------
 
-# Any Queries :-
+# Any Queries 
 
 ! Murali Anand#5615
 
