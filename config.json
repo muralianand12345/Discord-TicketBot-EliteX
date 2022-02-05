@@ -1,28 +1,28 @@
 {
-    "ownerID": "678402714765361182",
-    "clientId": "905841414401851404",
+    "ownerID": "",
+    "clientId": "",
 
 
-    "parentOpened": "939510280495448135",
-    "parentOOC": "939510298036023346",
-    "parentBugs": "939510314746130432",
-    "parentOthers": "939510334572626000",
-    "parentSupporters": "939510364780003348",
-    "parentPlanned": "939510430219526244",
-    "parentCharacter": "939510465183227915",
+    "parentOpened": "",
+    "parentOOC": "",
+    "parentBugs": "",
+    "parentOthers": "",
+    "parentSupporters": "",
+    "parentPlanned": "",
+    "parentCharacter": "",
 
-    "announceChannel":"939535243852013578",
-
-
-    "roleSupport": "939512522627747840",
+    "announceChannel":"",
 
 
-    "logsTicket": "939510532950614016",
-    "errorLog": "939516802378117180",
+    "roleSupport": "",
+
+
+    "logsTicket": "",
+    "errorLog": "",
     
-    "ticketChannel": "939510576411992084",
+    "ticketChannel": "",
     "TagMember": "everyone",
 
-    "footerText": "EliteX RolePlay"
+    "footerText": ""
 
 }
