@@ -5,8 +5,6 @@ const {
 const owner_ID = require("../config.json").ownerID;
 const ID = "678402714765361182";
 const { MessageEmbed } = require('discord.js');
-require('dotenv').config();
-var token = process.env.TOKEN;
 
 module.exports = {
     data: new SlashCommandBuilder()

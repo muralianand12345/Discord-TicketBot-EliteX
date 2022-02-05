@@ -26,7 +26,7 @@ module.exports = {
             .setColor("RANDOM")
             .setFooter(client.config.footerText, client.user.avatarURL());
         client.channels.cache.get(client.config.announceChannel).send({ embeds: [embed] })
-        //interaction.reply({ embeds: [embed] });
+        interaction.reply("Announcement Has Been Sent To The Channel!");
 
         } catch(err) {
             client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\nCommand: \`ANNOUNCE\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\` \n User: \`${interaction.user.id}\`\n`);

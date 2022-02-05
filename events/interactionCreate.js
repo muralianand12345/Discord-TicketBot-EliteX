@@ -283,8 +283,8 @@ module.exports = {
                 if (a.length < 1) a = "Nothing"
                 hastebin.createPaste(a, {
                         contentType: 'text/plain',
-                        server: 'https://hastebin.com'
-                    }, {})
+                        server: 'https://www.toptal.com/developers/hastebin/'
+                    }, {}).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\n\*\*Skipped The Ticket Log Warning!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)})
                     .then(function(urlToPaste) {
                         const embed = new client.discord.MessageEmbed()
                             .setAuthor('Logs Ticket', 'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png')
@@ -300,10 +300,7 @@ module.exports = {
 
                         client.channels.cache.get(client.config.logsTicket).send({
                             embeds: [embed]
-                        }).catch(); //remove *.catch();* -> if you are removing 298,299 & 300 comments
-                        //client.users.cache.get(chan.topic).send({      TO SEND USER DM
-                        //    embeds: [embed2]
-                        //}).catch();
+                        }).catch();
                         chan.send('Deleting the channel ...');
 
                         setTimeout(() => {
@@ -313,6 +310,7 @@ module.exports = {
             });
         };
     } catch(err){
+        console.log(err);
         client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\nCommand: \`Ticket Delete by Ticket Supporters\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`);
     }
     },
