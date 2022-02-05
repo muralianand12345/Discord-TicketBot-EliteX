@@ -8,7 +8,9 @@ module.exports = {
         .setName('help')
         .setDescription('Help Command'),
     async execute(interaction, client) {
-        const helpEmbed = new MessageEmbed()
+        client.channels.cache.get(client.config.errorLog).send(`Command Used: \`HELP\` \nUser: \`${interaction.user.id}\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\``);
+        try {
+            const helpEmbed = new MessageEmbed()
             .setColor('RANDOM')
             .setTitle('Help Command')
             .setURL('https://discord.gg/jPSbpsjb4r')
@@ -19,6 +21,11 @@ module.exports = {
             .setFooter(client.config.footerText, client.user.avatarURL());
 
         interaction.reply({ embeds: [helpEmbed] });
+
+        } catch(err) {
+            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\nCommand: \`HELP\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\` \n User: \`${interaction.user.id}\`\n`);
+        }
+        
 
     }
 };

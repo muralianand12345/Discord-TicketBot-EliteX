@@ -37,9 +37,9 @@ module.exports = {
 
                 const embed = new client.discord.MessageEmbed()
                     .setColor('6d6ee8')
-                    .setAuthor('Ticket', 'https://i.imgur.com/oO5ZSRK.png')
+                    .setAuthor('Ticket', 'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png')
                     .setDescription('Select the category of your ticket')
-                    .setFooter('Ticket', 'https://i.imgur.com/oO5ZSRK.png')
+                    .setFooter('Ticket', 'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png')
                     .setTimestamp();
 
                 const row = new client.discord.MessageActionRow()
@@ -97,9 +97,9 @@ module.exports = {
                             msg.delete().then(async() => {
                                 const embed = new client.discord.MessageEmbed()
                                     .setColor('6d6ee8')
-                                    .setAuthor('Ticket', 'https://i.imgur.com/oO5ZSRK.png')
+                                    .setAuthor('Ticket', 'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png')
                                     .setDescription(`<@!${interaction.user.id}> Created a ticket ${i.values[0]}`)
-                                    .setFooter('Ticket', 'https://i.imgur.com/oO5ZSRK.png')
+                                    .setFooter('Ticket', 'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png')
                                     .setTimestamp();
 
                                 const row = new client.discord.MessageActionRow()
@@ -112,7 +112,7 @@ module.exports = {
                                     );
 
                                 const opened = await c.send({
-                                    content: `<@&${client.config.roleSupport}>`,
+                                    content: `Your Ticket Has Been Created!`,
                                     embeds: [embed],
                                     components: [row]
                                 });
@@ -168,6 +168,7 @@ module.exports = {
                 });
             });
         };
+        try{
 
         if (interaction.customId == "close-ticket") {
             const guild = client.guilds.cache.get(interaction.guildId);
@@ -221,9 +222,9 @@ module.exports = {
                         .then(async() => {
                             const embed = new client.discord.MessageEmbed()
                                 .setColor('6d6ee8')
-                                .setAuthor('Ticket', 'https://i.imgur.com/oO5ZSRK.png')
+                                .setAuthor('Ticket', 'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png')
                                 .setDescription('```Ticket control```')
-                                .setFooter('Ticket', 'https://i.imgur.com/oO5ZSRK.png')
+                                .setFooter('Ticket', 'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png')
                                 .setTimestamp();
 
                             const row = new client.discord.MessageActionRow()
@@ -261,6 +262,11 @@ module.exports = {
                 };
             });
         };
+    } catch(err){
+        client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\nCommand: \`Ticket Delete by User\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`);
+    }
+
+    try{
 
         if (interaction.customId == "delete-ticket") {
             const guild = client.guilds.cache.get(interaction.guildId);
@@ -281,13 +287,13 @@ module.exports = {
                     }, {})
                     .then(function(urlToPaste) {
                         const embed = new client.discord.MessageEmbed()
-                            .setAuthor('Logs Ticket', 'https://i.imgur.com/oO5ZSRK.png')
+                            .setAuthor('Logs Ticket', 'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png')
                             .setDescription(`📰 Logs of the ticket \`${chan.id}\` created by <@!${chan.topic}> and deleted by <@!${interaction.user.id}>\n\nLogs: [**Click here to see the logs**](${urlToPaste})`)
                             .setColor('2f3136')
                             .setTimestamp();
 
                         const embed2 = new client.discord.MessageEmbed()
-                            .setAuthor('Logs Ticket', 'https://i.imgur.com/oO5ZSRK.png')
+                            .setAuthor('Logs Ticket', 'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png')
                             .setDescription(`📰 Logs of your ticket \`${chan.id}\`: [**Click here to see the logs**](${urlToPaste})`)
                             .setColor('2f3136')
                             .setTimestamp();
@@ -306,5 +312,8 @@ module.exports = {
                     });
             });
         };
+    } catch(err){
+        client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\nCommand: \`Ticket Delete by Ticket Supporters\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`);
+    }
     },
 };

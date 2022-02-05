@@ -11,12 +11,13 @@ module.exports = {
             .setDescription('Member to add to ticket')
             .setRequired(true)),
     async execute(interaction, client) {
-        const chan = client.channels.cache.get(interaction.channelId);
-        const user = interaction.options.getUser('target');
-
-        if (chan.name.includes('ticket')) {
-            chan.edit({
-                permissionOverwrites: [{
+        client.channels.cache.get(client.config.errorLog).send(`Command Used: \`ADD\` \nUser: \`${interaction.user.id}\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\``);
+        try{
+            const chan = client.channels.cache.get(interaction.channelId);
+            const user = interaction.options.getUser('target');
+            if (chan.name.includes('ticket')) {
+                chan.edit({
+                    permissionOverwrites: [{
                         id: user,
                         allow: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
                     },
@@ -40,5 +41,11 @@ module.exports = {
                 ephemeral: true
             });
         };
+
+        } catch(err) {
+            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\nCommand: \`ADD\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\` \n User: \`${interaction.user.id}\`\n`);
+
+        } 
+        
     },
 };
