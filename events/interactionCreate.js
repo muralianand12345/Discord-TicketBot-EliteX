@@ -223,7 +223,7 @@ module.exports = {
                             const embed = new client.discord.MessageEmbed()
                                 .setColor('6d6ee8')
                                 .setAuthor('Ticket', 'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png')
-                                .setDescription('```Ticket control```')
+                                .setDescription('```Ticket Supporters, Delete After Verifying```')
                                 .setFooter('Ticket', 'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png')
                                 .setTimestamp();
 
