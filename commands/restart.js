@@ -16,14 +16,18 @@ module.exports = {
     async execute(interaction, client) {
         client.channels.cache.get(client.config.errorLog).send(`Command Used: \`RESTART\` \nUser: \`${interaction.user.id}\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\``);
         try {
-            if (interaction.user.id != owner_ID || ID) 
-                return interaction.reply("This command is for developers only");
-
+            if (interaction.user.id != owner_ID || ID) {
+                await interaction.reply({content: "RESTARRR...",ephemeral: true});
+                await wait(1000);
+                await interaction.editReply({content:"Wait ... What?!",ephemeral: true});
+                await wait(2000);
+                return await interaction.editReply({content:"Bruh! You are not a developer, this command is not for you : )",ephemeral: true});
+            }
 
             await interaction.reply("RESTARTING FAST AS FUCK BOIIIIII ...").then((m) => {
                 client.destroy(token);
                 });
-            await wait(10000).then((m) => {
+            await wait(2000).then((m) => {
                 client.login(token);
             });
             await interaction.editReply("Damn Son! I'm Back 🔥");
