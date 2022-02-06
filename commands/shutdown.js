@@ -12,11 +12,10 @@ module.exports = {
         .setDescription('Shutdowns Bot(Owner Only!)'),
     async execute(interaction, client) {
         client.channels.cache.get(client.config.errorLog).send(`Command Used: \`SHUTDOWN\` \nUser: \`${interaction.user.id}\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\``);
-
-        if (!owner_ID || !ID)
-            return interaction.reply("This command is developers only");
-
         try {
+            if (interaction.user.id != owner_ID || ID) 
+                return interaction.reply("This command is for developers only");
+
             interaction.reply("THE BOT HAS BEEN SHUTDOWN!").then((m) => {
                 client.destroy();   
             });   
