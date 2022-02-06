@@ -9,7 +9,7 @@
         "moment": "^2.29.1"
     },
     "name": "ticket-bot",
-    "version": "2.1.1",
+    "version": "2.1.2",
     "description": "Bot with a ticket system using Discord.js v13",
     "main": "index.js",
     "scripts": {
