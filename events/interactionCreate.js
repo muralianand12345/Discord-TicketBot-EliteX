@@ -33,7 +33,7 @@ module.exports = {
                 interaction.reply({
                     content: `Ticket created! <#${c.id}>`,
                     ephemeral: true
-                });
+                }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\n\*\*Ticket Not Opened Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
 
                 const embed = new client.discord.MessageEmbed()
                     .setColor('6d6ee8')
@@ -84,7 +84,7 @@ module.exports = {
                     content: `<@!${interaction.user.id}>`,
                     embeds: [embed],
                     components: [row]
-                });
+                }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\n\*\*Ticket Options Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
 
                 const collector = msg.createMessageComponentCollector({
                     componentType: 'SELECT_MENU',
@@ -120,7 +120,7 @@ module.exports = {
                                 opened.pin().then(() => {
                                     opened.channel.bulkDelete(1);
                                 });
-                            });
+                            }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\n\*\*Option After Ticket Creation Error\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
                         };
                         if (i.values[0] == 'Ooc') {
                             c.edit({
@@ -153,7 +153,7 @@ module.exports = {
                             });
                         };
                     };
-                });
+                }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\n\*\*Ticket Unable to Move to the Correct Category\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
 
                 collector.on('end', collected => {
                     if (collected.size < 1) {
@@ -165,7 +165,7 @@ module.exports = {
                             }, 5000);
                         });
                     };
-                });
+                }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\n\*\*Category Timeout Error\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
             });
         };
         try{
@@ -201,7 +201,7 @@ module.exports = {
                     interaction.editReply({
                         content: `Ticket closed by <@!${interaction.user.id}>`,
                         components: []
-                    });
+                    }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\n\*\*Ticket Close by user Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
 
                     chan.edit({
                             name: `closed-${chan.name}`,
@@ -239,7 +239,7 @@ module.exports = {
                             chan.send({
                                 embeds: [embed],
                                 components: [row]
-                            });
+                            }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\n\*\*Ticket Closing Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
                         });
 
                     collector.stop();
@@ -251,7 +251,7 @@ module.exports = {
                     });
                     collector.stop();
                 };
-            });
+            }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\n\*\*Ticket Close Cancel Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
 
             collector.on('end', (i) => {
                 if (i.size < 1) {
@@ -260,7 +260,7 @@ module.exports = {
                         components: []
                     });
                 };
-            });
+            }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\n\*\*Ticket Close Cancel Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
         };
     } catch(err){
         client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\nCommand: \`Ticket Delete by User\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`);
@@ -274,7 +274,7 @@ module.exports = {
 
             interaction.reply({
                 content: 'Saving messages ...'
-            });
+            }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\n\*\*Ticket Save Messages Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
 
             chan.messages.fetch().then(async(messages) => {
                 let a = messages.filter(m => m.author.bot !== true).map(m =>
@@ -306,7 +306,7 @@ module.exports = {
                         setTimeout(() => {
                             chan.delete();
                         }, 5000);
-                    });
+                    }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\n\*\*HastBin Log Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
             });
         };
     } catch(err){
