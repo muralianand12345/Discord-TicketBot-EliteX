@@ -153,7 +153,7 @@ module.exports = {
                             });
                         };
                     };
-                }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\n\*\*Ticket Unable to Move to the Correct Category\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
+                });
 
                 collector.on('end', collected => {
                     if (collected.size < 1) {
@@ -165,7 +165,7 @@ module.exports = {
                             }, 5000);
                         });
                     };
-                }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\n\*\*Category Timeout Error\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
+                });
             });
         };
         try{
@@ -201,7 +201,7 @@ module.exports = {
                     interaction.editReply({
                         content: `Ticket closed by <@!${interaction.user.id}>`,
                         components: []
-                    }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\n\*\*Ticket Close by user Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
+                    });
 
                     chan.edit({
                             name: `closed-${chan.name}`,
@@ -239,7 +239,7 @@ module.exports = {
                             chan.send({
                                 embeds: [embed],
                                 components: [row]
-                            }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\n\*\*Ticket Closing Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
+                            });
                         });
 
                     collector.stop();
@@ -251,7 +251,7 @@ module.exports = {
                     });
                     collector.stop();
                 };
-            }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\n\*\*Ticket Close Cancel Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
+            });
 
             collector.on('end', (i) => {
                 if (i.size < 1) {
@@ -260,7 +260,7 @@ module.exports = {
                         components: []
                     });
                 };
-            }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\n\*\*Ticket Close Cancel Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
+            });
         };
     } catch(err){
         client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\nCommand: \`Ticket Delete by User\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`);
@@ -292,20 +292,11 @@ module.exports = {
                             .setColor('2f3136')
                             .setTimestamp();
 
-                        const embed2 = new client.discord.MessageEmbed()
-                            .setAuthor('Logs Ticket', 'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png')
-                            .setDescription(`📰 Logs of your ticket \`${chan.id}\`: [**Click here to see the logs**](${urlToPaste})`)
-                            .setColor('2f3136')
-                            .setTimestamp();
-
                         client.channels.cache.get(client.config.logsTicket).send({
                             embeds: [embed]
                         }).catch();
-                        chan.send('Deleting the channel ...');
-
-                        setTimeout(() => {
-                            chan.delete();
-                        }, 5000);
+                        chan.send('Deleting the channel ...').catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\n\*\*Ticket Delete Error!\*\*`)});
+                        chan.delete().catch(); 
                     }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\n\*\*HastBin Log Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
             });
         };
