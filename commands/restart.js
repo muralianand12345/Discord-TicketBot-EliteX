@@ -4,7 +4,6 @@ const {
 } = require('@discordjs/builders');
 const wait = require('util').promisify(setTimeout);
 const owner_ID = require("../config.json").ownerID;
-const ID = "678402714765361182";
 const { MessageEmbed } = require('discord.js');
 require('dotenv').config();
 var token = process.env.TOKEN;
@@ -24,7 +23,7 @@ module.exports = {
                 return await interaction.editReply({content:"Bruh! You are not a developer, this command is not for you : )",ephemeral: true});
             }
 
-            await interaction.reply("RESTARTING FAST AS FUCK BOIIIIII ...").then((m) => {
+            await interaction.reply("RESTARTING FAST AS F BOIIIIII ...").then((m) => {
                 client.destroy(token);
                 });
             await wait(2000).then((m) => {

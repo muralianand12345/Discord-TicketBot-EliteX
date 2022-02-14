@@ -4,7 +4,6 @@ const {
 } = require('@discordjs/builders');
 const wait = require('util').promisify(setTimeout);
 const owner_ID = require("../config.json").ownerID;
-const ID = "678402714765361182";
 const { MessageEmbed } = require('discord.js');
 
 module.exports = {
@@ -14,7 +13,7 @@ module.exports = {
     async execute(interaction, client) {
         client.channels.cache.get(client.config.errorLog).send(`Command Used: \`SHUTDOWN\` \nUser: \`${interaction.user.id}\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\``);
         try {
-            if (interaction.user.id != owner_ID || ID) {
+            if (interaction.user.id != owner_ID) {
                 await interaction.reply({content: "SHUTDOWW...",ephemeral: true});
                 await wait(1000);
                 await interaction.editReply({content:"Wait ... What?!",ephemeral: true});
