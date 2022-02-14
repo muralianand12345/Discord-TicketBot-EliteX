@@ -4,6 +4,7 @@ const {
     Collection,
     Intents
 } = require('discord.js');
+const keep_alive = require('./keep_alive.js')
 
 //config file for channels and owner id
 const config = require('./config.json');
