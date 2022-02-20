@@ -2,8 +2,7 @@
     "ownerID": "",
     "clientId": "",
     "errTag":"<@678402714765361182>, <@!758579147009163304>",
-
-
+    
     "parentOpened": "",
     "parentOOC": "",
     "parentBugs": "",
@@ -16,15 +15,12 @@
     "announceChannel":"",
 
     "DateNTime":"false",
-
     "dateChannel":"",
     "TIMEZONE":"Asia/Kolkata",
     "FORMATDate":"DD MMMM YYYY",
     "UPDATE_INTERVAL":"600000",
 
-
     "roleSupport": "",
-
 
     "logsTicket": "",
     "errorLog": "",
