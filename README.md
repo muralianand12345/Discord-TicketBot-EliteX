@@ -4,36 +4,36 @@ Advanced Ticket Bot | Discordjs@13 | slash command | components | interactions
 # config.json
 
     {
-    "ownerID": "",
-    "clientId": "",
+    "ownerID": "", Owner ID [ \@Murali ] => to find id 
+    "clientId": "", Bot's Application/Client ID
 
 
-    "parentOpened": "",
-    "parentOOC": "",
-    "parentBugs": "",
-    "parentOthers": "",
-    "parentSupporters": "",
-    "parentPlanned": "",
-    "parentCharacter": "",
+    "parentOpened": "", Location where ticket need to placed first 
+    "parentOOC": "", OOC Tickets (Category)
+    "parentBugs": "", Bugs Tickets (Category)
+    "parentOthers": "", Others Tickets (Category)
+    "parentSupporters": "", Supporters Tickets (Category)
+    "parentPlanned": "", Planned Tickets (Category)
+    "parentCharacter": "", Character Tickets (Category)
 
-    "announceChannel":"",
-    "DateNTime":"false",
-
-    "dateChannel":"",
-    "TIMEZONE":"Asia/Kolkata",
-    "FORMATDate":"DD MMMM YYYY",
-    "UPDATE_INTERVAL":"600000",
-
-    "roleSupport": "",
-
-
-    "logsTicket": "",
-    "errorLog": "",
+    "announceChannel":"", Announcement (VoiceProcess/Server Annoucement) Text Channel
+    "DateNTime":"false", true if you want date and time , false if you dont want
     
-    "ticketChannel": "",
-    "TagMember": "everyone",
+    "dateChannel":"", Voice Channel works good
+    "TIMEZONE":"Asia/Kolkata",  IST
+    "FORMATDate":"DD MMMM YYYY", check https://momentjs.com/docs/#/displaying/ for more info on this
+    "UPDATE_INTERVAL":"600000", API min req is 10mins, so you can't change below 10 mins i.e 600000
 
-    "footerText": ""
+    "roleSupport": "", Ticket Support Role ID
+
+
+    "logsTicket": "", Text Channel where your ticket logs should be saved
+    "errorLog": "", Text Channel where all your errors and command logs should be displayed ( btw don't forget to replace your id in the error commands )
+    
+    "ticketChannel": "", Text Channel where your ticket interaction will be sent
+    "TagMember": "everyone", Change this according to your needs
+
+    "footerText": "" Your embed footer here
     }
 
 
