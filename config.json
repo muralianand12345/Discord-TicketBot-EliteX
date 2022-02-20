@@ -1,37 +1,37 @@
 {
-    "ownerID": "678402714765361182",
-    "clientId": "905841414401851404",
+    "ownerID": "",
+    "clientId": "",
     "errTag":"<@678402714765361182>, <@!758579147009163304>",
 
 
-    "parentOpened": "939510280495448135",
-    "parentOOC": "939510298036023346",
-    "parentBugs": "939510314746130432",
-    "parentOthers": "939510334572626000",
-    "parentSupporters": "939510364780003348",
-    "parentPlanned": "939510430219526244",
-    "parentCharacter": "939510465183227915",
-    "parentClose": "943144987330248734",
+    "parentOpened": "",
+    "parentOOC": "",
+    "parentBugs": "",
+    "parentOthers": "",
+    "parentSupporters": "",
+    "parentPlanned": "",
+    "parentCharacter": "",
+    "parentClose": "",
 
-    "announceChannel":"939535243852013578",
+    "announceChannel":"",
 
     "DateNTime":"false",
 
-    "dateChannel":"944801788480081961",
+    "dateChannel":"",
     "TIMEZONE":"Asia/Kolkata",
     "FORMATDate":"DD MMMM YYYY",
     "UPDATE_INTERVAL":"600000",
 
 
-    "roleSupport": "939512522627747840",
+    "roleSupport": "",
 
 
-    "logsTicket": "939510532950614016",
-    "errorLog": "939516802378117180",
+    "logsTicket": "",
+    "errorLog": "",
     
-    "ticketChannel": "939510576411992084",
+    "ticketChannel": "",
     "TagMember": "everyone",
 
-    "footerText": "EliteX RolePlay"
+    "footerText": ""
 
 }
