@@ -13,7 +13,8 @@ module.exports = {
         .setName('restart')
         .setDescription('Restarts Bot(Owner Only!)'),
     async execute(interaction, client) {
-        client.channels.cache.get(client.config.errorLog).send(`Command Used: \`RESTART\` \nUser: \`${interaction.user.id}\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\``);
+        const logMsg = `Command Used: \`RESTART\` \nUser: \`${interaction.user.id}\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\``;
+        client.channels.cache.get(client.config.errorLog).send(logMsg);
         try {
             if (interaction.user.id != owner_ID || ID) {
                 await interaction.reply({content: "RESTARRR...",ephemeral: true});
@@ -30,12 +31,10 @@ module.exports = {
                 client.login(token);
             });
             await interaction.editReply("Damn Son! I'm Back 🔥");
- 
-            
-            
               
         } catch(err) {
-            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\nCommand: \`RESTART\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\` \n User: \`${interaction.user.id}\`\n`);
+            const errTag = client.config.errTag;
+            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\nCommand: \`RESTART\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\` \n User: \`${interaction.user.id}\`\n`);
         }
         
     },

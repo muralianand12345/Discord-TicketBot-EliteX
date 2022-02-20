@@ -10,7 +10,8 @@ module.exports = {
         .setName('invite')
         .setDescription("Sends EliteX RP Server Invite Link"),
     async execute(interaction, client) {
-        client.channels.cache.get(client.config.errorLog).send(`Command Used: \`INVITE\` \nUser: \`${interaction.user.id}\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\``);
+        const logMsg = `Command Used: \`INVITE\` \nUser: \`${interaction.user.id}\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\``;
+        client.channels.cache.get(client.config.errorLog).send(logMsg);
         try {
             const row = new MessageActionRow()
 			.addComponents(
@@ -26,7 +27,8 @@ module.exports = {
             .addField('**Join ELiteX RP**', `[Here](https://discord.gg/jPSbpsjb4r)`, true)
             interaction.reply({embeds: [mainPage], components: [row]})
         } catch(err) {
-            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\nCommand: \`INVITE\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\` \n User: \`${interaction.user.id}\`\n`);
+            const errTag = client.config.errTag;
+            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\nCommand: \`INVITE\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\` \n User: \`${interaction.user.id}\`\n`);
         }
         
     }

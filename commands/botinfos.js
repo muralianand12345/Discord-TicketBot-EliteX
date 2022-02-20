@@ -13,7 +13,8 @@ module.exports = {
         .setName('botinfo')
         .setDescription('About the Bot <3'),
     async execute(interaction, client) {
-        client.channels.cache.get(client.config.errorLog).send(`Command Used: \`BOTINFO\` \nUser: \`${interaction.user.id}\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\``);
+        const logMsg = `Command Used: \`BOTINFO\` \nUser: \`${interaction.user.id}\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\``;
+        client.channels.cache.get(client.config.errorLog).send(logMsg);
         try {
             const row = new MessageActionRow()
             .addComponents(
@@ -75,7 +76,8 @@ module.exports = {
             return interaction.reply({embeds: [embed], components: [row]});
 
         } catch(err) {
-            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\nCommand: \`BOTINFO\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\` \n User: \`${interaction.user.id}\`\n`);
+            const errTag = client.config.errTag;
+            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\nCommand: \`BOTINFO\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\` \n User: \`${interaction.user.id}\`\n`);
         }
         
     },

@@ -11,7 +11,8 @@ module.exports = {
             .setDescription('Member to add to ticket')
             .setRequired(true)),
     async execute(interaction, client) {
-        client.channels.cache.get(client.config.errorLog).send(`Command Used: \`ADD\` \nUser: \`${interaction.user.id}\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\``);
+        const logMsg = `Command Used: \`ADD\` \nUser: \`${interaction.user.id}\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\``;
+        client.channels.cache.get(client.config.errorLog).send(logMsg);
         try{
             const chan = client.channels.cache.get(interaction.channelId);
             const user = interaction.options.getUser('target');
@@ -43,7 +44,8 @@ module.exports = {
         };
 
         } catch(err) {
-            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\nCommand: \`ADD\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\` \n User: \`${interaction.user.id}\`\n`);
+            const errTag = client.config.errTag;
+            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\nCommand: \`ADD\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\` \n User: \`${interaction.user.id}\`\n`);
 
         } 
         

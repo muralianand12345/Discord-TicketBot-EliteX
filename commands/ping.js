@@ -9,7 +9,8 @@ module.exports = {
         .setName('ping')
         .setDescription("Ping Pong!"),
     async execute(interaction, client) {
-        client.channels.cache.get(client.config.errorLog).send(`Command Used: \`PING\` \nUser: \`${interaction.user.id}\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\``);
+        const logMsg = `Command Used: \`PING\` \nUser: \`${interaction.user.id}\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\``;
+        client.channels.cache.get(client.config.errorLog).send(logMsg);
         try {
             let embed = new discord.MessageEmbed()
             .setAuthor("PONG!", client.user.avatarURL())
@@ -18,7 +19,8 @@ module.exports = {
             .setFooter(client.config.footerText, client.user.avatarURL());
         interaction.reply({ embeds: [embed] });
         } catch(err) {
-            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** <@678402714765361182> \n${err}\nCommand: \`PING\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\` \n User: \`${interaction.user.id}\`\n`);
+            const errTag = client.config.errTag;
+            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\nCommand: \`PING\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\` \n User: \`${interaction.user.id}\`\n`);
         }
         
     }
