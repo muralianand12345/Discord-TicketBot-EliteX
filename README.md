@@ -17,7 +17,12 @@ Advanced Ticket Bot | Discordjs@13 | slash command | components | interactions
     "parentCharacter": "",
 
     "announceChannel":"",
+    "DateNTime":"false",
 
+    "dateChannel":"",
+    "TIMEZONE":"Asia/Kolkata",
+    "FORMATDate":"DD MMMM YYYY",
+    "UPDATE_INTERVAL":"600000",
 
     "roleSupport": "",
 
@@ -29,8 +34,7 @@ Advanced Ticket Bot | Discordjs@13 | slash command | components | interactions
     "TagMember": "everyone",
 
     "footerText": ""
-
-}
+    }
 
 
 ---------------------------------------------
