@@ -40,7 +40,7 @@
 ---------------------------------------------
 
 ## ENV
-- TOKEN= <your beautiful discord bot>
+- TOKEN= `Your beautiful discord bot`
 
 ---------------------------------------------
 
