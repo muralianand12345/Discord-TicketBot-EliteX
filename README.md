@@ -1,7 +1,7 @@
-# Discord_TicketBot
-Advanced Ticket Bot | Discordjs@13 | slash command | components | interactions
+## Discord_TicketBot
+- Advanced Ticket Bot | Discordjs@13 | slash command | components | interactions
 
-# config.json
+## config.json
 
     {
     "ownerID": "", Owner ID [ \@Murali ] => to find id 
@@ -39,31 +39,31 @@ Advanced Ticket Bot | Discordjs@13 | slash command | components | interactions
 
 ---------------------------------------------
 
-# ENV
-TOKEN= <your beautiful discord bot>
+## ENV
+- TOKEN= <your beautiful discord bot>
 
 ---------------------------------------------
 
-# Versions 
+## Versions 
 
-Discord - version 13.2.0
-Node - version 16.13.1
+- Discord - version 13.2.0
+- Node - version 16.13.1
 
 ---------------------------------------------
 
-# Installation 
+## Installation 
     
-   `npm i` => **INSTALLS ALL NECESSARY PACKAGES**
-   `node for-text.js` => **SENDS MESSAGES IN THE CHANNEL** (OPTIONAL) Note: Change the values before running the command
-   `node deploy-commands.js` =>  **FOR SLASH COMMANDS** (IGNORE IF YOU DONT WANT / SLASH COMMANDS)
-   `node index.js` => **RUN BOT**
+-   `npm i` => **INSTALLS ALL NECESSARY PACKAGES**
+-   `node for-text.js` => **SENDS MESSAGES IN THE CHANNEL** (OPTIONAL)
+-   `node deploy-commands.js` =>  **FOR SLASH COMMANDS** 
+-   `node index.js` => **RUN BOT**
 
 ---------------------------------------------
 
-# Any Queries 
+## Any Queries 
 
-! Murali Anand#5615
+- ! Murali Anand#5615
 
-:)
+- :)
 
-Note: This Bot uses HastBin For Text Logs
+- Note: This Bot uses HastBin For Text Logs
