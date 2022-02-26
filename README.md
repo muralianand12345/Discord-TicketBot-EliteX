@@ -52,11 +52,11 @@ Node - version 16.13.1
 ---------------------------------------------
 
 # Installation 
-
-`npm i` => **INSTALLS ALL NECESSARY PACKAGES** \n
-`node for-text.js` => **SENDS MESSAGES IN THE CHANNEL** (OPTIONAL) Note: Change the values before running the command \n
-`node deploy-commands.js` =>  **FOR SLASH COMMANDS** (IGNORE IF YOU DONT WANT / SLASH COMMANDS) \n
-`node index.js` => **RUN BOT** \n
+    
+   `npm i` => **INSTALLS ALL NECESSARY PACKAGES**
+   `node for-text.js` => **SENDS MESSAGES IN THE CHANNEL** (OPTIONAL) Note: Change the values before running the command
+   `node deploy-commands.js` =>  **FOR SLASH COMMANDS** (IGNORE IF YOU DONT WANT / SLASH COMMANDS)
+   `node index.js` => **RUN BOT**
 
 ---------------------------------------------
 
