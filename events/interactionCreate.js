@@ -1,4 +1,5 @@
 let hastebin = require('hastebin');
+const imgurl = require('../config.json').eliteximage
 
 module.exports = {
     name: 'interactionCreate',
@@ -39,9 +40,9 @@ module.exports = {
 
                 const embed = new client.discord.MessageEmbed()
                     .setColor('6d6ee8')
-                    .setAuthor({name:'Ticket', iconURL:'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png'})
+                    .setAuthor({name:'Ticket', iconURL:imgurl})
                     .setDescription('Select the category of your ticket')
-                    .setFooter({text:'Ticket', iconURL:'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png'})
+                    .setFooter({text:'Ticket', iconURL:imgurl})
                     .setTimestamp();
 
                 const row = new client.discord.MessageActionRow()
@@ -99,9 +100,9 @@ module.exports = {
                             msg.delete().then(async() => {
                                 const embed = new client.discord.MessageEmbed()
                                     .setColor('6d6ee8')
-                                    .setAuthor({name:'Ticket', iconURL:'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png'})
+                                    .setAuthor({name:'Ticket', iconURL:imgurl})
                                     .setDescription(`<@!${interaction.user.id}> Created a ticket ${i.values[0]}`)
-                                    .setFooter({text:'Ticket', iconURL:'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png'})
+                                    .setFooter({text:'Ticket', iconURL:imgurl})
                                     .setTimestamp();
 
                                 const row = new client.discord.MessageActionRow()
@@ -226,9 +227,9 @@ module.exports = {
                         .then(async() => {
                             const embed = new client.discord.MessageEmbed()
                                 .setColor('6d6ee8')
-                                .setAuthor({name:'Ticket', iconURL:'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png'})
+                                .setAuthor({name:'Ticket', iconURL:imgurl})
                                 .setDescription('```Ticket Supporters, Delete After Verifying```')
-                                .setFooter({text:'Ticket', iconURL:'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png'})
+                                .setFooter({text:'Ticket', iconURL:imgurl})
                                 
                                 .setTimestamp();
 
@@ -292,7 +293,7 @@ module.exports = {
                     }, {}).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\n\*\*Skipped The Ticket Log Warning!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)})
                     .then(function(urlToPaste) {
                         const embed = new client.discord.MessageEmbed()
-                            .setAuthor({name:'Logs Ticket', iconURL:'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png'})
+                            .setAuthor({name:'Logs Ticket', iconURL:imgurl})
                             .setDescription(`📰 Logs of the ticket \`${chan.id}\` created by <@!${chan.topic}> and deleted by <@!${interaction.user.id}>\n\nLogs: [**Click here to see the logs**](${urlToPaste})`)
                             .setColor('2f3136')
                             .setTimestamp();
