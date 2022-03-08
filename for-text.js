@@ -8,6 +8,8 @@ const client = new Client({
 });
 
 const channelId = require('./config.json').ticketChannel;
+//or 
+//const channelId = "channel id here"
 
 client.on('ready', client => {
     console.log(`Bot ${client.user.tag} is logged in!`);
