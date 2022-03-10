@@ -8,6 +8,7 @@
     "hastebin": "^0.2.1",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
+    "moment-timezone": "^0.5.34",
     "systeminformation": "^5.11.2"
   },
   "name": "ticket-bot",
