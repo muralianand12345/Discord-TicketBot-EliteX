@@ -1,5 +1,7 @@
 const moment = require('moment');
 const tz = require('moment-timezone');
+const config = require('../config.json')
+const { MessageEmbed } = require('discord.js')
 //const chalk = require('chalk');
 
 module.exports = {
@@ -45,7 +47,20 @@ module.exports = {
             console.log('Error Has been occured at Time and Date!');
         }
 
+        const err_log=client.channels.cache.get(config.errorLog)
+        const ran_tit = Math.floor(Math.random() * (activities.length - 1) + 1);
+        const tit = activities[ran_tit];
         
+        const embed = new MessageEmbed()
+            .setColor("GREEN")
+            .setTitle(`Bot Online`)
+            .setDescription(`Ready to listen ${tit}`)
+            .setAuthor({name:"EliteX Support", iconURL:config.eliteximage})
+            .setFooter({text:"EliteX Support", iconURL:config.eliteximage})
+            .setThumbnail(config.eliteximage)
+            .setTimestamp();
+        
+        err_log.send({embeds:[embed]});
 
     },
 };
