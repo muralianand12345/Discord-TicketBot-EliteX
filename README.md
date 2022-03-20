@@ -15,8 +15,7 @@
     "parentSupporters": "", Supporters Tickets (Category)
     "parentPlanned": "", Planned Tickets (Category)
     "parentCharacter": "", Character Tickets (Category)
-
-    "announceChannel":"", Announcement (VoiceProcess/Server Annoucement) Text Channel
+    
     "DateNTime":"false", true if you want date and time , false if you dont want
     
     "dateChannel":"", Voice Channel works good
