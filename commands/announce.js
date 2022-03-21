@@ -35,7 +35,7 @@ module.exports = {
             return;
         }
 
-        if (annchannel.type !== 'text') {
+        if (annchannel.type !== 'GUILD_TEXT') {
             interaction.reply({ content: "`Select Only Text Channels`", ephemeral: true });
             return;
         }
