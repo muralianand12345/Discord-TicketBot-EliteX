@@ -14,7 +14,7 @@ module.exports = {
         const logMsg = `Command Used: \`TICKETMESSAGE\` \nUser: \`${interaction.user.id}\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\``;
         client.channels.cache.get(client.config.errorLog).send(logMsg);
         if (interaction.user.id != owner_ID) {
-            await interaction.reply({content: "SHUTDOWW...",ephemeral: true});
+            await interaction.reply({content: "SENDINGGG...",ephemeral: true});
             await wait(1000);
             await interaction.editReply({content:"Wait ... What?!",ephemeral: true});
             await wait(2000);
