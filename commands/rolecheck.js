@@ -41,6 +41,7 @@ module.exports = {
                 }
                 if (common.length == 0) {
                     interaction.reply({ content: `No Members`, ephemeral: true });
+                    return;
                 } else {
                     return common;
                 }     
