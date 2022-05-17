@@ -1,17 +1,20 @@
 let hastebin = require('hastebin');
-const imgurl = require('../config.json').eliteximage
 
 module.exports = {
     name: 'interactionCreate',
     async execute(interaction, client) {
         const errTag = client.config.errTag;
+        const errorLog = client.config.errorLog;
+        const errorSend = client.channels.cache.get(errorLog);
+
         if (!interaction.isButton()) return;
         if (interaction.customId == "open-ticket") {
             if (client.guilds.cache.get(interaction.guildId).channels.cache.find(c => c.topic == interaction.user.id)) {
                 interaction.reply({
                     content: 'You have already created a ticket!',
                     ephemeral: true
-                }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Already Opened Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
+                }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Already Opened Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
+                errorSend.send(`The User \`${interaction.user.id}\` has already opened a Ticket \n Unable to open a new Ticket`);
                 return;
             };
 
@@ -36,13 +39,13 @@ module.exports = {
                 interaction.reply({
                     content: `Ticket created! <#${c.id}>`,
                     ephemeral: true
-                }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Not Opened Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
+                }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Not Opened Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
 
                 const embed = new client.discord.MessageEmbed()
                     .setColor('6d6ee8')
-                    .setAuthor({name:'Ticket', iconURL:imgurl})
+                    .setAuthor({name:'Ticket', iconURL:'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png'})
                     .setDescription('Select the category of your ticket')
-                    .setFooter({text:'Ticket', iconURL:imgurl})
+                    .setFooter({text:'Ticket', iconURL:'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png'})
                     .setTimestamp();
 
                 const row = new client.discord.MessageActionRow()
@@ -54,6 +57,11 @@ module.exports = {
                                 label: 'OOC',
                                 value: 'Ooc',
                                 emoji: '📝',
+                            },
+                            {
+                                label: 'COMBAT LOGGING',
+                                value: 'CombatLogging',
+                                emoji: '🗡️',
                             },
                             {
                                 label: 'BUGS',
@@ -87,7 +95,9 @@ module.exports = {
                     content: `<@!${interaction.user.id}>`,
                     embeds: [embed],
                     components: [row]
-                }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Options Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
+                }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Options Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
+
+                errorSend.send(`The User \`${interaction.user.id}\` has opened a Ticket \n Category Menu!`);
 
                 const collector = msg.createMessageComponentCollector({
                     componentType: 'SELECT_MENU',
@@ -100,9 +110,9 @@ module.exports = {
                             msg.delete().then(async() => {
                                 const embed = new client.discord.MessageEmbed()
                                     .setColor('6d6ee8')
-                                    .setAuthor({name:'Ticket', iconURL:imgurl})
+                                    .setAuthor({name:'Ticket', iconURL:'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png'})
                                     .setDescription(`<@!${interaction.user.id}> Created a ticket ${i.values[0]}`)
-                                    .setFooter({text:'Ticket', iconURL:imgurl})
+                                    .setFooter({text:'Ticket', iconURL:'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png'})
                                     .setTimestamp();
 
                                 const row = new client.discord.MessageActionRow()
@@ -123,11 +133,16 @@ module.exports = {
                                 opened.pin().then(() => {
                                     opened.channel.bulkDelete(1);
                                 });
-                            }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\n\*\*Option After Ticket Creation Error\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
+                            }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Option After Ticket Creation Error\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
                         };
                         if (i.values[0] == 'Ooc') {
                             c.edit({
                                 parent: client.config.parentOOC
+                            });
+                        };
+                        if (i.values[0] == 'CombatLogging') {
+                            c.edit({
+                                parent: client.config.parentCL
                             });
                         };
                         if (i.values[0] == 'Bugs') {
@@ -168,6 +183,7 @@ module.exports = {
                             }, 5000);
                         });
                     };
+                    errorSend.send(`The User \`${interaction.user.id}\` opened a Ticket is closed \n No Category is Selected!`);
                 });
             });
         };
@@ -223,13 +239,13 @@ module.exports = {
                                     deny: ['VIEW_CHANNEL'],
                                 },
                             ],
-                        }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\n\*\*Cannot Delete Ticket!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)})
+                        }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Cannot Delete Ticket!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)})
                         .then(async() => {
                             const embed = new client.discord.MessageEmbed()
                                 .setColor('6d6ee8')
-                                .setAuthor({name:'Ticket', iconURL:imgurl})
+                                .setAuthor({name:'Ticket', iconURL:'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png'})
                                 .setDescription('```Ticket Supporters, Delete After Verifying```')
-                                .setFooter({text:'Ticket', iconURL:imgurl})
+                                .setFooter({text:'Ticket', iconURL:'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png'})
                                 
                                 .setTimestamp();
 
@@ -269,7 +285,7 @@ module.exports = {
             });
         };
     } catch(err){
-        client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\nCommand: \`Ticket Delete by User\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`);
+        errorSend.send(`**ERROR!** ${errTag} \n${err}\nCommand: \`Ticket Delete by User\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`);
     }
 
     try{
@@ -280,7 +296,7 @@ module.exports = {
 
             interaction.reply({
                 content: 'Saving messages ...'
-            }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Save Messages Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
+            }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Save Messages Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
 
             chan.messages.fetch().then(async(messages) => {
                 let a = messages.filter(m => m.author.bot !== true).map(m =>
@@ -290,10 +306,10 @@ module.exports = {
                 hastebin.createPaste(a, {
                         contentType: 'text/plain',
                         server: 'https://www.toptal.com/developers/hastebin/'
-                    }, {}).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\n\*\*Skipped The Ticket Log Warning!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)})
+                    }, {}).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Skipped The Ticket Log Warning!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)})
                     .then(function(urlToPaste) {
                         const embed = new client.discord.MessageEmbed()
-                            .setAuthor({name:'Logs Ticket', iconURL:imgurl})
+                            .setAuthor({name:'Logs Ticket', iconURL:'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png'})
                             .setDescription(`📰 Logs of the ticket \`${chan.id}\` created by <@!${chan.topic}> and deleted by <@!${interaction.user.id}>\n\nLogs: [**Click here to see the logs**](${urlToPaste})`)
                             .setColor('2f3136')
                             .setTimestamp();
@@ -303,15 +319,15 @@ module.exports = {
                         }).catch(err => {console.log(err)});
                         chan.send("Deleting the channel...");
 
-                        setTimeout( () => chan.delete().catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\n\*\*Spamming\*\*`)}),5000);
+                        setTimeout( () => chan.delete().catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Spamming\*\*`)}),5000);
 
                         
-                    }).catch(err => {client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\n\*\*HastBin Log Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
+                    }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*HastBin Log Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
             });
         };
     } catch(err){
         console.log(err);
-        client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\nCommand: \`Ticket Delete by Ticket Supporters\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`);
+        errorSend.send(`**ERROR!** ${errTag} \n${err}\nCommand: \`Ticket Delete by Ticket Supporters\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`);
     }
     },
 };
