@@ -1,3 +1,6 @@
+//If you need only 1 ticket menu ... delete this file as well as ticketmessageredm.js in commands folder
+//Modify according to your usage
+
 let hastebin = require('hastebin');
 
 module.exports = {
