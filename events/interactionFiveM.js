@@ -1,3 +1,5 @@
+//Seperate Ticket bot menu for FiveM tickets alone! Kindly modify according to your usage.
+
 let hastebin = require('hastebin');
 
 module.exports = {
