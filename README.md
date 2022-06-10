@@ -4,36 +4,58 @@
 ## config.json
 
     {
-    "ownerID": "", Owner ID [ \@Murali ] => to find id 
-    "clientId": "", Bot's Application/Client ID
+    "ownerID": "678402714765361182", Owner's ID
+    "clientId": "", Bot's / Applications ID
+    "errTag":"<@678402714765361182>", For tagging errors
 
+    "parentOpened": "", 
 
-    "parentOpened": "", Location where ticket need to placed first 
-    "parentOOC": "", OOC Tickets (Category)
-    "parentBugs": "", Bugs Tickets (Category)
-    "parentOthers": "", Others Tickets (Category)
-    "parentSupporters": "", Supporters Tickets (Category)
-    "parentPlanned": "", Planned Tickets (Category)
-    "parentCharacter": "", Character Tickets (Category)
+    "parentCLFivem": "",
+    "parentConnectRedm": "",
+
+    "parentOOCFivem": "",
+    "parentOOCRedm": "",
+
+    "parentBugsFivem": "",
+    "parentBugsRedm": "",
+
+    "parentOthersFivem": "",
+    "parentOthersRedm": "",
+
+    "parentSupportersFivem": "",
+    "parentSupportersRedm": "",
+
+    "parentPlannedFivem": "",
+    "parentPlannedRedm": "",
+
+    "parentCharacterFivem": "",
+    "parentCharacterRedm": "",
+
+    "parentClose": "",
+
+    "roleSupport": "", Ticket Supporter Role ID
+
+    "DateNTime":"false",
+    "dateChannel":"", Date Voice Channel ID (VC works better)
+    "TIMEZONE":"Asia/Kolkata",
+    "FORMATDate":"DD MMMM YYYY",
+    "UPDATE_INTERVAL":"600000",
+
+    "logsTicket": "", Ticket logs channel
+    "errorLog": "", Ticket bot error message channel
+
+    "role1ID": "", For role check 
+    "role2ID": "",
     
-    "DateNTime":"false", true if you want date and time , false if you dont want
-    
-    "dateChannel":"", Voice Channel works good
-    "TIMEZONE":"Asia/Kolkata",  IST
-    "FORMATDate":"DD MMMM YYYY", check https://momentjs.com/docs/#/displaying/ for more info on this
-    "UPDATE_INTERVAL":"600000", API min req is 10mins, so you can't change below 10 mins i.e 600000
+    "ticketChannelFivem": "", Ticket Message channel 
+    "ticketChannelRedm": "",
 
-    "roleSupport": "", Ticket Support Role ID
+    "TagMember": "COMMUNITY",
+    "footerText": "EliteX RolePlay",
+    "eliteximage": "https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png"
 
+}
 
-    "logsTicket": "", Text Channel where your ticket logs should be saved
-    "errorLog": "", Text Channel where all your errors and command logs should be displayed ( btw don't forget to replace your id in the error commands )
-    
-    "ticketChannel": "", Text Channel where your ticket interaction will be sent
-    "TagMember": "everyone", Change this according to your needs
-
-    "footerText": "" Your embed footer here
-    }
 
 
 ---------------------------------------------
