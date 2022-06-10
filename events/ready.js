@@ -1,3 +1,5 @@
+//Modify activities accordingly 
+
 const moment = require('moment');
 const tz = require('moment-timezone');
 const config = require('../config.json')
@@ -6,6 +8,7 @@ const { MessageEmbed } = require('discord.js')
 module.exports = {
     name: 'ready',
     execute(client) {
+        //Change the below words for Activity
         const activities = [
             "Queries 24/7!",
             "EliteX RolePlay ❤️",
@@ -16,7 +19,7 @@ module.exports = {
             "Grand Theft Auto V",
             "Red Dead Redemption II"
           ];
-
+//Console Messages in the terminal
         console.log(`${client.user.tag} Bot is ready to rock n roll!`);
         console.log('Developed For EliteX Rp <3');
 
@@ -48,7 +51,7 @@ module.exports = {
         } else {
             console.log('Error Has been occured at Time and Date!');
         }
-
+//Change if needed
         const err_log=client.channels.cache.get(config.errorLog)
         const ran_tit = Math.floor(Math.random() * (activities.length - 1) + 1);
         const tit = activities[ran_tit];
