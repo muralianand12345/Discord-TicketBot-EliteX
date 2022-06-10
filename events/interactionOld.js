@@ -1,3 +1,5 @@
+//This File is for old users, if you are new i.e just now starting to use this ticket bot ... just delete this file.
+
 let hastebin = require('hastebin');
 
 module.exports = {
