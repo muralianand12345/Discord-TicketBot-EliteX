@@ -1,16 +1,34 @@
 {
-    "ownerID": "",
+    "ownerID": "678402714765361182",
     "clientId": "",
-    "errTag":"<@678402714765361182>, <@!758579147009163304>",
-    
+    "errTag":"<@678402714765361182>",
+
     "parentOpened": "",
-    "parentOOC": "",
-    "parentBugs": "",
-    "parentOthers": "",
-    "parentSupporters": "",
-    "parentPlanned": "",
-    "parentCharacter": "",
+
+    "parentCLFivem": "",
+    "parentConnectRedm": "",
+
+    "parentOOCFivem": "",
+    "parentOOCRedm": "",
+
+    "parentBugsFivem": "",
+    "parentBugsRedm": "",
+
+    "parentOthersFivem": "",
+    "parentOthersRedm": "",
+
+    "parentSupportersFivem": "",
+    "parentSupportersRedm": "",
+
+    "parentPlannedFivem": "",
+    "parentPlannedRedm": "",
+
+    "parentCharacterFivem": "",
+    "parentCharacterRedm": "",
+
     "parentClose": "",
+
+    "roleSupport": "",
 
     "DateNTime":"false",
     "dateChannel":"",
@@ -18,18 +36,18 @@
     "FORMATDate":"DD MMMM YYYY",
     "UPDATE_INTERVAL":"600000",
 
-    "roleSupport": "",
-
     "logsTicket": "",
-    "errorLog": "939815604330835969",
-    
-    "ticketChannel": "",
-    "TagMember": "everyone",
-    
+    "errorLog": "",
+
     "role1ID": "",
     "role2ID": "",
+    
+    "ticketChannelFivem": "",
+    "ticketChannelRedm": "",
 
-    "footerText": "",
+    "TagMember": "COMMUNITY",
+    "footerText": "EliteX RolePlay",
     "eliteximage": "https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png"
 
 }
+
