@@ -13,6 +13,7 @@ const config = require('./config.json');
 require('dotenv').config();
 var token = process.env.TOKEN;
 
+//Don't change below if you know what you are doing
 const client = new Client({
     intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS],
 });
