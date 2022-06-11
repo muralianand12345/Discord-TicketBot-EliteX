@@ -1,5 +1,4 @@
-//This File is for old users, if you are new i.e just now starting to use this ticket bot ... just delete this file.
-
+// For Old Users
 let hastebin = require('hastebin');
 
 module.exports = {
@@ -19,6 +18,22 @@ module.exports = {
                     ephemeral: true
                 }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Already Opened Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
                 errorSend.send(`The User \`${interaction.user.id}\` has already opened a Ticket \n Unable to open a new Ticket (OLD)`);
+                return;
+            };
+            if (client.guilds.cache.get(interaction.guildId).channels.cache.find(c => c.topic == interaction.user.id + 1)) {
+                interaction.reply({
+                    content: '**You Have Already Created a Ticket!**',
+                    ephemeral: true
+                }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Already Opened Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
+                errorSend.send(`The User \`${interaction.user.id}\` has already opened a Ticket \n Unable to open a new Ticket(FIVEM)`);
+                return;
+            };
+            if (client.guilds.cache.get(interaction.guildId).channels.cache.find(c => c.topic == interaction.user.id + 2)) {
+                interaction.reply({
+                    content: '**You Have Already Created a Ticket!**',
+                    ephemeral: true
+                }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Already Opened Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
+                errorSend.send(`The User \`${interaction.user.id}\` has already opened a Ticket \n Unable to open a new Ticket(REDM)`);
                 return;
             };
 

@@ -1,18 +1,10 @@
 const fs = require('fs');
-const {
-    REST
-} = require('@discordjs/rest');
-const {
-    Routes
-} = require('discord-api-types/v9');
-const {
-    clientId
-} = require('./config.json');
+const { REST } = require('@discordjs/rest');
+const { Routes } = require('discord-api-types/v9');
+require("dotenv").config();
 
-require('dotenv').config();
-var token = process.env.TOKEN;
-//const t = require('./token.json');
-
+const Token = process.env.TOKEN;
+const clientID = process.env.ClIENTID;
 const commands = [];
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
@@ -23,10 +15,8 @@ for (const file of commandFiles) {
 
 const rest = new REST({
     version: '9'
-}).setToken(token);
+}).setToken(Token);
 
-rest.put(Routes.applicationCommands(clientId), {
-        body: commands
-    })
-    .then(() => console.log('Successfully registered application commands.'))
-    .catch(console.error);
+rest.put(Routes.applicationCommands(clientID), {
+    body: commands
+}).then(() => console.log('Successfully registered application commands.')).catch(console.error);

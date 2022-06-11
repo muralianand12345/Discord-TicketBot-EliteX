@@ -23,19 +23,22 @@ module.exports = {
         const logMsg = `Command Used: \`ANNOUNCE\` \nUser: \`${interaction.user.id}\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\``;
         client.channels.cache.get(client.config.errorLog).send(logMsg);
 
-        const tagMember = require('../config.json').TagMember;
-
         const annnouceText = interaction.options.getString('text');
         const annchannel = interaction.options.getChannel('channelid');  
-
         const executer = client.guilds.cache.get(interaction.guildId).members.cache.get(interaction.user.id);
 
-        if (!executer.permissions.has(client.discord.Permissions.FLAGS.MANAGE_ROLES)) {
-            return await interaction.reply({ content: 'You do not have the required permission to execute this command!', ephemeral: true});
+        if (!executer.permissions.has(client.discord.Permissions.FLAGS.MANAGE_ROLES))  {
+            return await interaction.reply({
+                content: 'You do not have the required permission to execute this command!',
+                ephemeral: true
+            });
         }
-
+        
         if (annchannel.type !== 'GUILD_TEXT') {
-            await interaction.reply({ content: "`Select Only Text Channels`", ephemeral: true });
+            await interaction.reply({ 
+                content: "`Select Only Text Channels`", 
+                ephemeral: true 
+            });
             return;
         }
 
@@ -49,4 +52,6 @@ module.exports = {
         }
     },
 };
+
+
 

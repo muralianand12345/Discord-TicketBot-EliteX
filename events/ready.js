@@ -1,5 +1,3 @@
-//Modify activities accordingly 
-
 const moment = require('moment');
 const tz = require('moment-timezone');
 const config = require('../config.json')
@@ -8,7 +6,6 @@ const { MessageEmbed } = require('discord.js')
 module.exports = {
     name: 'ready',
     execute(client) {
-        //Change the below words for Activity
         const activities = [
             "Queries 24/7!",
             "EliteX RolePlay ❤️",
@@ -19,17 +16,18 @@ module.exports = {
             "Grand Theft Auto V",
             "Red Dead Redemption II"
           ];
-//Console Messages in the terminal
+
         console.log(`${client.user.tag} Bot is ready to rock n roll!`);
         console.log('Developed For EliteX Rp <3');
 
         setInterval(() => {
-                const randomIndex = Math.floor(Math.random() * (activities.length - 1) + 1);
-                const newActivity = activities[randomIndex];
-                client.user.setActivity(newActivity,{ type : "PLAYING"});
-            }, 5000);
+            const randomIndex = Math.floor(Math.random() * (activities.length - 1) + 1);
+            const newActivity = activities[randomIndex];
+            client.user.setActivity(newActivity,{ type : "PLAYING"});
+        }, 5000);
 
         const needDatenTime = client.config.DateNTime;
+
         if (needDatenTime == "true") {
             console.log('Date and Time has been enabled');
             const TIMEZONE = client.config.TIMEZONE;
@@ -46,23 +44,26 @@ module.exports = {
                 clockChannel.edit({ name: `🕒 ${timeNowUpdate}` }, 'Clock update').catch(console.error);
             }, UPDATE_INTERVAL);
 
+
         } else if (needDatenTime == "false") {
             console.log('Date and Time has been disabled');
         } else {
             console.log('Error Has been occured at Time and Date!');
         }
-//Change if needed
+
         const err_log=client.channels.cache.get(config.errorLog)
         const ran_tit = Math.floor(Math.random() * (activities.length - 1) + 1);
         const tit = activities[ran_tit];
+
         const embed = new MessageEmbed()
             .setColor("GREEN")
             .setTitle(`Bot Online`)
             .setDescription(`Ready to listen ${tit}`)
-            .setAuthor({name:"EliteX Support", iconURL:config.eliteximage})
-            .setFooter({text:"EliteX Support", iconURL:config.eliteximage})
+            .setAuthor({name:config.discordBotName, iconURL:config.discordBotImage})
+            .setFooter({text:config.discordBotName, iconURL:config.discordBotImage})
             .setThumbnail(config.eliteximage)
             .setTimestamp();
+            
         err_log.send({embeds:[embed]});
     },
 };

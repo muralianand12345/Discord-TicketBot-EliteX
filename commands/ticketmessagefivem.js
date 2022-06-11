@@ -6,7 +6,6 @@ const discord = require("discord.js");
 const owner_ID = require("../config.json").ownerID;
 const wait = require('util').promisify(setTimeout);
 
-
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('ticketmessagefivem')

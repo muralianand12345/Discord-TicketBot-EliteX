@@ -1,6 +1,3 @@
-//If you need only 1 ticket menu ... delete this file as well as ticketmessageredm.js in commands folder
-//Modify according to your usage
-
 let hastebin = require('hastebin');
 
 module.exports = {
@@ -13,7 +10,8 @@ module.exports = {
 
         if (!interaction.isButton()) return;
         if (interaction.customId == "open-ticket-redm") {
-            if (client.guilds.cache.get(interaction.guildId).channels.cache.find(c => c.topic == interaction.user.id + 2)) {
+
+            if (client.guilds.cache.get(interaction.guildId).channels.cache.find(c => c.topic == interaction.user.id + RedM)) {
                 interaction.reply({
                     content: '**You Have Already Created a Ticket!**',
                     ephemeral: true
@@ -24,7 +22,7 @@ module.exports = {
 
             interaction.guild.channels.create(`redm-ticket-${interaction.user.username}`, {
                 parent: client.config.parentOpened,
-                topic: interaction.user.id + 2,
+                topic: interaction.user.id + RedM,
                 permissionOverwrites: [{
                         id: interaction.user.id,
                         allow: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
@@ -255,7 +253,7 @@ module.exports = {
                             parent: client.config.parentClose,
                             permissionOverwrites: [
                                 {
-                                    id: client.users.cache.get(chan.topic - 2), //error
+                                    id: client.users.cache.get(chan.topic - RedM), //error
                                     deny: ['SEND_MESSAGES','VIEW_CHANNEL'],
                                 },
                                 {
@@ -349,7 +347,7 @@ module.exports = {
                     .then(function(urlToPaste) {
                         const embed = new client.discord.MessageEmbed()
                             .setAuthor({name:'Logs Ticket', iconURL:'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png'})
-                            .setDescription(`📰 Logs of the ticket \`${chan.id}\` created by <@!${chan.topic - 2}> and deleted by <@!${interaction.user.id}>\n\nLogs: [**Click here to see the logs**](${urlToPaste})`)
+                            .setDescription(`📰 Logs of the ticket \`${chan.id}\` created by <@!${chan.topic - RedM}> and deleted by <@!${interaction.user.id}>\n\nLogs: [**Click here to see the logs**](${urlToPaste})`)
                             .setColor('2f3136')
                             .setTimestamp();
 

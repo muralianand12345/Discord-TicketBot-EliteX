@@ -11,8 +11,10 @@ module.exports = {
         .setName('shutdown')
         .setDescription('Shutdowns Bot(Owner Only!)'),
     async execute(interaction, client) {
+
         const logMsg = `Command Used: \`SHUTDOWN\` \nUser: \`${interaction.user.id}\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\``;
         client.channels.cache.get(client.config.errorLog).send(logMsg);
+        
         try {
             if (interaction.user.id != owner_ID) {
                 await interaction.reply({content: "SHUTDOWW...",ephemeral: true});
@@ -25,10 +27,10 @@ module.exports = {
             interaction.reply("THE BOT HAS BEEN SHUTDOWN!").then((m) => {
                 client.destroy();   
             });   
+
         } catch(err) {
             const errTag = client.config.errTag;
             client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\nCommand: \`SHUTDOWN\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\` \n User: \`${interaction.user.id}\`\n`);
         }
-        
     },
 };

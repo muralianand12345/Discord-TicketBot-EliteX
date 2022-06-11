@@ -1,5 +1,3 @@
-//Seperate Ticket bot menu for FiveM tickets alone! Kindly modify according to your usage.
-
 let hastebin = require('hastebin');
 
 module.exports = {
@@ -14,7 +12,8 @@ module.exports = {
 
         if (!interaction.isButton()) return;
         if (interaction.customId == "open-ticket-fivem") {
-            if (client.guilds.cache.get(interaction.guildId).channels.cache.find(c => c.topic == interaction.user.id + 1)) {
+
+            if (client.guilds.cache.get(interaction.guildId).channels.cache.find(c => c.topic == interaction.user.id + FiveM)) {
                 interaction.reply({
                     content: '**You Have Already Created a Ticket!**',
                     ephemeral: true
@@ -25,7 +24,7 @@ module.exports = {
 
             interaction.guild.channels.create(`fivem-ticket-${interaction.user.username}`, {
                 parent: client.config.parentOpened,
-                topic: interaction.user.id + 1,
+                topic: interaction.user.id + FiveM,
                 permissionOverwrites: [{
                         id: interaction.user.id,
                         allow: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
@@ -255,7 +254,7 @@ module.exports = {
                             parent: client.config.parentClose,
                             permissionOverwrites: [
                                 {
-                                    id: client.users.cache.get(chan.topic - 1), //error
+                                    id: client.users.cache.get(chan.topic - FiveM), //error
                                     deny: ['SEND_MESSAGES','VIEW_CHANNEL'],
                                 },
                                 {
@@ -349,7 +348,7 @@ module.exports = {
                     .then(function(urlToPaste) {
                         const embed = new client.discord.MessageEmbed()
                             .setAuthor({name:'Logs Ticket', iconURL:'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png'})
-                            .setDescription(`📰 Logs of the ticket \`${chan.id}\` created by <@!${chan.topic - 1}> and deleted by <@!${interaction.user.id}>\n\nLogs: [**Click here to see the logs**](${urlToPaste})`)
+                            .setDescription(`📰 Logs of the ticket \`${chan.id}\` created by <@!${chan.topic - FiveM}> and deleted by <@!${interaction.user.id}>\n\nLogs: [**Click here to see the logs**](${urlToPaste})`)
                             .setColor('2f3136')
                             .setTimestamp();
 

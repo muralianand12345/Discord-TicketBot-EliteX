@@ -1,6 +1,5 @@
 {
     "ownerID": "678402714765361182",
-    "clientId": "",
     "errTag":"<@678402714765361182>",
 
     "parentOpened": "",
@@ -47,7 +46,7 @@
 
     "TagMember": "COMMUNITY",
     "footerText": "EliteX RolePlay",
-    "eliteximage": "https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png"
+    "discordBotName": "EliteX Support",
+    "discordBotImage": "https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png"
 
 }
-
