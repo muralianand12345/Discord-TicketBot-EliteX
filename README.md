@@ -53,8 +53,7 @@
     "TagMember": "COMMUNITY",
     "footerText": "EliteX RolePlay",
     "eliteximage": "https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png"
-
-}
+    }
 
 
 
