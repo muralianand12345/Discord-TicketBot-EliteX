@@ -17,9 +17,10 @@ module.exports = {
                     content: '**You Have Already Created a Ticket!**',
                     ephemeral: true
                 }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Already Opened Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
-                errorSend.send(`The User \`${interaction.user.id}\` has already opened a Ticket \n Unable to open a new Ticket (OLD)`);
+                errorSend.send(`The User \`${interaction.user.id}\` has already opened a Ticket \n Unable to open a new Ticket(OLD)`);
                 return;
             };
+
             if (client.guilds.cache.get(interaction.guildId).channels.cache.find(c => c.topic == interaction.user.id + 1)) {
                 interaction.reply({
                     content: '**You Have Already Created a Ticket!**',
@@ -28,6 +29,7 @@ module.exports = {
                 errorSend.send(`The User \`${interaction.user.id}\` has already opened a Ticket \n Unable to open a new Ticket(FIVEM)`);
                 return;
             };
+
             if (client.guilds.cache.get(interaction.guildId).channels.cache.find(c => c.topic == interaction.user.id + 2)) {
                 interaction.reply({
                     content: '**You Have Already Created a Ticket!**',
@@ -176,7 +178,7 @@ module.exports = {
                     .then(function(urlToPaste) {
                         const embed = new client.discord.MessageEmbed()
                             .setAuthor({name:'Logs Ticket', iconURL:'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png'})
-                            .setDescription(`📰 Logs of the ticket \`${chan.id}\` created by <@!${chan.topic - 1}> and deleted by <@!${interaction.user.id}>\n\nLogs: [**Click here to see the logs**](${urlToPaste})`)
+                            .setDescription(`📰 Logs of the ticket \`${chan.id}\` created by <@!${chan.topic}> and deleted by <@!${interaction.user.id}>\n\nLogs: [**Click here to see the logs**](${urlToPaste})`)
                             .setColor('2f3136')
                             .setTimestamp();
 
@@ -200,4 +202,3 @@ module.exports = {
     },
 
 };
-

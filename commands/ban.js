@@ -15,10 +15,8 @@ module.exports = {
             .setDescription('Reason for ban')
             .setRequired(false)),
     async execute(interaction, client) {
-
         const logMsg = `Command Used: \`BAN\` \nUser: \`${interaction.user.id}\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\``;
         client.channels.cache.get(client.config.errorLog).send(logMsg);
-
         const user = client.guilds.cache.get(interaction.guildId).members.cache.get(interaction.options.getUser('target').id);
         const executer = client.guilds.cache.get(interaction.guildId).members.cache.get(interaction.user.id);
 
@@ -36,23 +34,19 @@ module.exports = {
             content: "The person you want to ban is above me! So I can't ban it.",
             ephemeral: true
         });
-
         try{
             if (interaction.options.getString('reason')) {
                 user.ban({
                     reason: interaction.options.getString('reason'),
                     days: 1
                 });
-
                 interaction.reply({
                     content: `**${user.user.tag}** Has been successfully banned!`
                 });
-
             } else {
                 user.ban({
                     days: 1
                 });
-
                 interaction.reply({
                     content: `**${user.user.tag}**Has been successfully banned!`
                 });
@@ -61,6 +55,8 @@ module.exports = {
         } catch(err) {
             const errTag = client.config.errTag;
             client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\nCommand: \`BAN\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\` \n User: \`${interaction.user.id}\`\n`);
-        }   
+        }
+
+        
     },
 };

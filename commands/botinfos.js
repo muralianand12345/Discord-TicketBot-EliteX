@@ -4,17 +4,18 @@ const {
 const { MessageEmbed, MessageButton, MessageActionRow } = require("discord.js");
 const moment = require("moment");
 require("moment-duration-format");
+const os = require('os')
+const si = require('systeminformation');
+
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('botinfo')
         .setDescription('About the Bot <3'),
     async execute(interaction, client) {
-
         const logMsg = `Command Used: \`BOTINFO\` \nUser: \`${interaction.user.id}\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\``;
         client.channels.cache.get(client.config.errorLog).send(logMsg);
         try {
-
             const row = new MessageActionRow()
             .addComponents(
                 new MessageButton()
@@ -46,8 +47,8 @@ module.exports = {
                 },
                 {
                     name: 'Servers',
-                    value: `\`\`\`${client.guilds.cache.size}\`\`\``,
-                    //value: `\`\`\`1\`\`\``,
+                    //value: `\`\`\`${client.guilds.cache.size}\`\`\``,
+                    value: `\`\`\`1\`\`\``,
                     inline: true,
                 },
                 {
@@ -70,13 +71,14 @@ module.exports = {
                     value: `\`\`\`${duration1}\`\`\``,
                     inline: true,
                 },
+                  
             );
-
             return interaction.reply({embeds: [embed], components: [row]});
 
         } catch(err) {
             const errTag = client.config.errTag;
             client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\nCommand: \`BOTINFO\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\` \n User: \`${interaction.user.id}\`\n`);
         }
+        
     },
 };

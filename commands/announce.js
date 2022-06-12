@@ -25,26 +25,22 @@ module.exports = {
 
         const annnouceText = interaction.options.getString('text');
         const annchannel = interaction.options.getChannel('channelid');  
+
         const executer = client.guilds.cache.get(interaction.guildId).members.cache.get(interaction.user.id);
 
-        if (!executer.permissions.has(client.discord.Permissions.FLAGS.MANAGE_ROLES))  {
-            return await interaction.reply({
-                content: 'You do not have the required permission to execute this command!',
-                ephemeral: true
-            });
-        }
-        
+        if (!executer.permissions.has(client.discord.Permissions.FLAGS.MANAGE_CHANNELS)) return interaction.reply({
+            content: 'You do not have the required permission to execute this command!',
+            ephemeral: true
+        });
+
         if (annchannel.type !== 'GUILD_TEXT') {
-            await interaction.reply({ 
-                content: "`Select Only Text Channels`", 
-                ephemeral: true 
-            });
+            interaction.reply({ content: "`Select Only Text Channels`", ephemeral: true });
             return;
         }
 
         try {
            client.channels.cache.get(annchannel.id).send({ content: annnouceText })
-           await interaction.reply("Announcement Has Been Sent To The Channel!");
+           interaction.reply("Announcement Has Been Sent To The Channel!");
 
         } catch(err) {
             const errTag = client.config.errTag;
@@ -52,6 +48,4 @@ module.exports = {
         }
     },
 };
-
-
 

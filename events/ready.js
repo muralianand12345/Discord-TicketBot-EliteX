@@ -16,34 +16,32 @@ module.exports = {
             "Grand Theft Auto V",
             "Red Dead Redemption II"
           ];
-
         console.log(`${client.user.tag} Bot is ready to rock n roll!`);
         console.log('Developed For EliteX Rp <3');
 
         setInterval(() => {
-            const randomIndex = Math.floor(Math.random() * (activities.length - 1) + 1);
-            const newActivity = activities[randomIndex];
-            client.user.setActivity(newActivity,{ type : "PLAYING"});
-        }, 5000);
+                const randomIndex = Math.floor(Math.random() * (activities.length - 1) + 1);
+                const newActivity = activities[randomIndex];
+                client.user.setActivity(newActivity,{ type : "PLAYING"});
+            }, 5000);
+
 
         const needDatenTime = client.config.DateNTime;
-
         if (needDatenTime == "true") {
             console.log('Date and Time has been enabled');
             const TIMEZONE = client.config.TIMEZONE;
             const FORMAT = client.config.FORMATDate;
             const CHANNEL_ID = client.config.dateChannel;
             const UPDATE_INTERVAL = client.config.UPDATE_INTERVAL;
+
             const timeNow = moment().tz(TIMEZONE).format(FORMAT);
             const clockChannel = client.channels.cache.get(CHANNEL_ID);
-
             clockChannel.edit({ name: `🕒 ${timeNow}` }, 'Clock update').catch(console.error);
 
             setInterval(() => {
                 const timeNowUpdate = moment().tz(TIMEZONE).format(FORMAT);
                 clockChannel.edit({ name: `🕒 ${timeNowUpdate}` }, 'Clock update').catch(console.error);
             }, UPDATE_INTERVAL);
-
 
         } else if (needDatenTime == "false") {
             console.log('Date and Time has been disabled');
@@ -52,19 +50,13 @@ module.exports = {
         }
 
         const err_log=client.channels.cache.get(config.errorLog)
-        const ran_tit = Math.floor(Math.random() * (activities.length - 1) + 1);
-        const tit = activities[ran_tit];
 
         const embed = new MessageEmbed()
             .setColor("GREEN")
-            .setTitle(`Bot Online`)
-            .setDescription(`Ready to listen ${tit}`)
-            .setAuthor({name:config.discordBotName, iconURL:config.discordBotImage})
-            .setFooter({text:config.discordBotName, iconURL:config.discordBotImage})
-            .setThumbnail(config.eliteximage)
+            .setTitle(`Bot Restart Completed and Online ❤️`)
             .setTimestamp();
-            
+
         err_log.send({embeds:[embed]});
+
     },
 };
-
