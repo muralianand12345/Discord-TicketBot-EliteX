@@ -87,10 +87,3 @@
 - :)
 - Note: This Bot uses HastBin For Text Logs
 
----------------------------------------------
-
-## For Repit
-
-- Run .replit file by clicking 'Start' button
-- Copy the website link and create a new application in UpTime Robot
-- https://uptimerobot.com
