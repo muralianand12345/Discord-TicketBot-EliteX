@@ -20,7 +20,7 @@ module.exports = {
         ),
 
     async execute(interaction, client) {
-        const logMsg = `Command Used: \`ANNOUNCE\` \nUser: \`${interaction.user.id}\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\``;
+        const logMsg = `Command Used: \`ANNOUNCE\` \nUser: <@!${interaction.user.id}> \nChannel: <#${interaction.channel.id}>`;
         client.channels.cache.get(client.config.errorLog).send(logMsg);
 
         const annnouceText = interaction.options.getString('text');
@@ -44,7 +44,7 @@ module.exports = {
 
         } catch(err) {
             const errTag = client.config.errTag;
-            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\nCommand: \`ANNOUNCE\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\` \n User: \`${interaction.user.id}\`\n`);
+            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\n${logMsg}`);
         }
     },
 };

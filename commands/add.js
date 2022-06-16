@@ -5,13 +5,13 @@ const {
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('add')
-        .setDescription('Add someone to the ticket')
+        .setDescription('Add someone to the ticket (Ticket Command) ')
         .addUserOption(option =>
             option.setName('target')
             .setDescription('Member to add to ticket')
             .setRequired(true)),
     async execute(interaction, client) {
-        const logMsg = `Command Used: \`ADD\` \nUser: \`${interaction.user.id}\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\``;
+        const logMsg = `Command Used: \`ADD\` \nUser: <@!${interaction.user.id}> \nChannel: <#${interaction.channel.id}>`;
         client.channels.cache.get(client.config.errorLog).send(logMsg);
         try{
             const chan = client.channels.cache.get(interaction.channelId);
@@ -20,6 +20,10 @@ module.exports = {
                 chan.edit({
                     permissionOverwrites: [{
                         id: user,
+                        allow: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
+                    },
+                    {
+                        id: interaction.user.id,
                         allow: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
                     },
                     {
@@ -45,7 +49,7 @@ module.exports = {
 
         } catch(err) {
             const errTag = client.config.errTag;
-            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\nCommand: \`ADD\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\` \n User: \`${interaction.user.id}\`\n`);
+            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\n${logMsg}`);
 
         } 
         

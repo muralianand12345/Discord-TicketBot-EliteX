@@ -17,8 +17,8 @@ module.exports = {
                 interaction.reply({
                     content: '**You have already created a ticket! Kindly Contact any \`Ticket Supporters\` if not!**',
                     ephemeral: true
-                }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Already Opened Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
-                errorSend.send(`The User \`${interaction.user.id}\` has already opened a Ticket \n Unable to open a new Ticket(REDM)`);
+                }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Already Opened Error!\*\* \nChannel: <#${interaction.channel.id}>`)});
+                errorSend.send(`The User <@!${interaction.user.id}> has already opened a Ticket \n Unable to open a new Ticket(REDM)`);
                 return;
             };
 
@@ -43,7 +43,7 @@ module.exports = {
                 interaction.reply({
                     content: `Ticket created! <#${c.id}>`,
                     ephemeral: true
-                }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Not Opened Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
+                }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Not Opened Error!\*\* \nChannel: <#${interaction.channel.id}>`)});
 
                 const embed = new client.discord.MessageEmbed()
                     .setColor('6d6ee8')
@@ -99,7 +99,7 @@ module.exports = {
                     content: `<@!${interaction.user.id}>`,
                     embeds: [embed],
                     components: [row]
-                }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Options Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
+                }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Options Error!\*\* \nChannel: <#${interaction.channel.id}>`)});
 
                 const collector = msg.createMessageComponentCollector({
                     componentType: 'SELECT_MENU',
@@ -127,7 +127,7 @@ module.exports = {
                                     );
 
                                 const opened = await c.send({
-                                    content: `Your Ticket Has Been Created!`,
+                                    content: `**Your Ticket Has Been Created!** *Use \`/id\` and fill the following!*`,
                                     embeds: [embed],
                                     components: [row]
                                 });
@@ -135,7 +135,7 @@ module.exports = {
                                 opened.pin().then(() => {
                                     opened.channel.bulkDelete(1);
                                 });
-                            }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Option After Ticket Creation Error\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
+                            }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Option After Ticket Creation Error\*\* \nChannel: <#${interaction.channel.id}>`)});
                         };
                         if (i.values[0] == 'Ooc') {
                             c.edit({
@@ -184,14 +184,18 @@ module.exports = {
                                 };
                             }, 5000);
                         });
+                        errorSend.send(`<@!${interaction.user.id}> Menu Closed!\n No Category Selected(REDM)`);
                     };
-                    errorSend.send(`\`${interaction.user.id}\` Menu Closed!\n No Category Selected(REDM)`);
+                    
                 });
             });
         };
         try{
 
         if (interaction.customId == "close-ticket-redm") {
+
+            const userButton = interaction.user.id;
+
             const guild = client.guilds.cache.get(interaction.guildId);
             const chan = guild.channels.cache.get(interaction.channelId);
 
@@ -218,9 +222,10 @@ module.exports = {
             });
 
             collector.on('collect', i => {
+
                 if (i.customId == 'confirm-close-redm') {
                     interaction.editReply({
-                        content: `Ticket closed by <@!${i.user.id}>`,
+                        content: `**Ticket closed by** <@!${i.user.id}>`,
                         components: []
                     });
 
@@ -243,7 +248,7 @@ module.exports = {
                                     deny: ['VIEW_CHANNEL'],
                                 },
                             ],
-                        }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Cannot Delete Ticket!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)})
+                        }).catch(err => {})
                         .then(async() => {
                             const embed = new client.discord.MessageEmbed()
                                 .setColor('6d6ee8')
@@ -272,7 +277,7 @@ module.exports = {
                 };
                 if (i.customId == 'no-redm') {
                     interaction.editReply({
-                        content: 'Ticket closure cancelled !',
+                        content: `**Ticket closure cancelled!** (<@!${i.user.id}>)`,
                         components: []
                     });
                     collector.stop();
@@ -282,14 +287,14 @@ module.exports = {
             collector.on('end', (i) => {
                 if (i.size < 1) {
                     interaction.editReply({
-                        content: 'Closing of the canceled ticket!',
+                        content: `**Closing of the canceled ticket!** (<@!${userButton}>)`,
                         components: []
                     });
                 };
             });
         };
     } catch(err){
-        errorSend.send(`**ERROR!** ${errTag} \n${err}\nCommand: \`Ticket Delete by User\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`);
+        errorSend.send(`**ERROR!** ${errTag} \n${err}\nCommand: \`Ticket Delete by User\` \nChannel: <#${interaction.channel.id}>`);
     }
 
     try{
@@ -300,7 +305,7 @@ module.exports = {
 
             interaction.reply({
                 content: 'Saving messages ...'
-            }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Save Messages Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
+            }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Save Messages Error!\*\* \nChannel: <#${interaction.channel.id}>`)});
 
             const chanTopic = BigInt(chan.topic) - BigInt(2);
 
@@ -312,7 +317,7 @@ module.exports = {
                 hastebin.createPaste(a, {
                         contentType: 'text/plain',
                         server: 'https://www.toptal.com/developers/hastebin/'
-                    }, {}).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Skipped The Ticket Log Warning!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)})
+                    }, {}).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Skipped The Ticket Log Warning!\*\* \nChannel: <#${interaction.channel.id}>`)})
                     .then(function(urlToPaste) {
                         const embed = new client.discord.MessageEmbed()
                             .setAuthor({name:'Logs Ticket', iconURL:'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png'})
@@ -328,12 +333,12 @@ module.exports = {
                         setTimeout( () => chan.delete().catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Spamming\*\*`)}),5000);
 
                         
-                    }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*HastBin Log Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
+                    }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*HastBin Log Error!\*\* \nChannel: <#${interaction.channel.id}>`)});
             });
         };
     } catch(err){
         console.log(err);
-        errorSend.send(`**ERROR!** ${errTag} \n${err}\nCommand: \`Ticket Delete by Ticket Supporters\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`);
+        errorSend.send(`**ERROR!** ${errTag} \n${err}\nCommand: \`Ticket Delete by Ticket Supporters\` \nChannel: <#${interaction.channel.id}>`);
     }
     },
 };

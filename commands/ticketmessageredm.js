@@ -12,7 +12,7 @@ module.exports = {
         .setName('ticketmessageredm')
         .setDescription("Sends Ticket To Ticket Channel!"),
     async execute(interaction, client) {
-        const logMsg = `Command Used: \`TICKETMESSAGEREDM\` \nUser: \`${interaction.user.id}\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\``;
+        const logMsg = `Command Used: \`TICKETMESSAGEREDM\` \nUser: <@!${interaction.user.id}> \nChannel: <#${interaction.channel.id}>`;
         client.channels.cache.get(client.config.errorLog).send(logMsg);
         
         if (interaction.user.id != owner_ID) {
@@ -53,7 +53,7 @@ module.exports = {
 
         } catch(err) {
             const errTag = client.config.errTag;
-            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\nCommand \`Ticket Message\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\` \n User: \`${interaction.user.id}\`\n`);
+            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\n${logMsg}`);
         }
         
     }

@@ -27,6 +27,7 @@ module.exports = {
 
 
         const needDatenTime = client.config.DateNTime;
+
         if (needDatenTime == "true") {
             console.log('Date and Time has been enabled');
             const TIMEZONE = client.config.TIMEZONE;
@@ -55,7 +56,6 @@ module.exports = {
             .setColor("GREEN")
             .setTitle(`Bot Restart Completed and Online ❤️`)
             .setTimestamp();
-
         err_log.send({embeds:[embed]});
 
     },

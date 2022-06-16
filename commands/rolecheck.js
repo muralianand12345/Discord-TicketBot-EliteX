@@ -12,8 +12,9 @@ module.exports = {
         .setName('rolecheck')
         .setDescription("Prints the user with PR role and Community role"),
     async execute(interaction, client) {
-        const logMsg = `Command Used: \`ROLECHECK\` \nUser: \`${interaction.user.id}\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\``;
+        const logMsg = `Command Used: \`ROLECHECK\` \nUser: <@!${interaction.user.id}> \nChannel: <#${interaction.channel.id}>`;
         client.channels.cache.get(client.config.errorLog).send(logMsg);
+        
         try {
             if (interaction.user.id != owner_ID) {
                 await interaction.reply({content: "ROLEEE...",ephemeral: true});
@@ -52,7 +53,7 @@ module.exports = {
 
         } catch(err) {
             const errTag = client.config.errTag;
-            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\nCommand: \`ROLECHECK\` \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\` \n User: \`${interaction.user.id}\`\n`);
+            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\n${logMsg}`);
         }
         
     }
