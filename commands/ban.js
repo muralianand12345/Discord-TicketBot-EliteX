@@ -1,6 +1,7 @@
 const {
     SlashCommandBuilder
 } = require('@discordjs/builders');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -15,8 +16,18 @@ module.exports = {
             .setDescription('Reason for ban')
             .setRequired(false)),
     async execute(interaction, client) {
-        const logMsg = `Command Used: \`BAN\` \nUser: <@!${interaction.user.id}> \nChannel: <#${interaction.channel.id}>`;
-        client.channels.cache.get(client.config.errorLog).send(logMsg);
+        const commandName = "BAN";
+
+        const logEmbed = new MessageEmbed()
+        .setColor("GREEN")
+        .addFields(
+            { name: "Command", value: `${commandName}`},
+            { name: "User", value: `<@!${interaction.user.id}>`},
+            { name: "Channel", value: `<#${interaction.channel.id}>`}
+        )
+        
+        client.channels.cache.get(client.config.errorLog).send({ embeds: [logEmbed]});
+
         const user = client.guilds.cache.get(interaction.guildId).members.cache.get(interaction.options.getUser('target').id);
         const executer = client.guilds.cache.get(interaction.guildId).members.cache.get(interaction.user.id);
 
@@ -54,7 +65,16 @@ module.exports = {
 
         } catch(err) {
             const errTag = client.config.errTag;
-            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\n${logMsg}`);
+            const errEmbed = new MessageEmbed()
+            .setTitle("ERROR")
+            .setColor("RED")
+            .setDescription(`${err}`)
+            .addFields(
+                { name: "Command", value: `${commandName}`},
+                { name: "User", value: `<@!${interaction.user.id}>`},
+                { name: "Channel", value: `<#${interaction.channel.id}>`}
+            )
+            client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
         }
 
         

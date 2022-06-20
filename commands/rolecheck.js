@@ -2,8 +2,6 @@ const {
     SlashCommandBuilder
 } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
-const discord = require("discord.js");
-const {MessageActionRow, MessageButton } = require("discord.js");
 const owner_ID = require("../config.json").ownerID;
 const wait = require('util').promisify(setTimeout);
 
@@ -12,8 +10,17 @@ module.exports = {
         .setName('rolecheck')
         .setDescription("Prints the user with PR role and Community role"),
     async execute(interaction, client) {
-        const logMsg = `Command Used: \`ROLECHECK\` \nUser: <@!${interaction.user.id}> \nChannel: <#${interaction.channel.id}>`;
-        client.channels.cache.get(client.config.errorLog).send(logMsg);
+        const commandName = "ROLECHECK";
+
+        const logEmbed = new MessageEmbed()
+        .setColor("GREEN")
+        .addFields(
+            { name: "Command", value: `${commandName}`},
+            { name: "User", value: `<@!${interaction.user.id}>`},
+            { name: "Channel", value: `<#${interaction.channel.id}>`}
+        )
+        
+        client.channels.cache.get(client.config.errorLog).send({ embeds: [logEmbed]});
         
         try {
             if (interaction.user.id != owner_ID) {
@@ -53,7 +60,16 @@ module.exports = {
 
         } catch(err) {
             const errTag = client.config.errTag;
-            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\n${logMsg}`);
+            const errEmbed = new MessageEmbed()
+            .setTitle("ERROR")
+            .setColor("RED")
+            .setDescription(`${err}`)
+            .addFields(
+                { name: "Command", value: `${commandName}`},
+                { name: "User", value: `<@!${interaction.user.id}>`},
+                { name: "Channel", value: `<#${interaction.channel.id}>`}
+            )
+            client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
         }
         
     }

@@ -17,8 +17,17 @@ module.exports = {
             .setDescription('Provide the name of anime')
             .setRequired(true)),
     async execute(interaction, client) {
-        const logMsg = `Command Used: \`ANIME\` \nUser: <@!${interaction.user.id}> \nChannel: <#${interaction.channel.id}>`;
-        client.channels.cache.get(client.config.errorLog).send(logMsg);
+        const commandName = "ANIME";
+
+        const logEmbed = new MessageEmbed()
+        .setColor("GREEN")
+        .addFields(
+            { name: "Command", value: `${commandName}`},
+            { name: "User", value: `<@!${interaction.user.id}>`},
+            { name: "Channel", value: `<#${interaction.channel.id}>`}
+        )
+        
+        client.channels.cache.get(client.config.errorLog).send({ embeds: [logEmbed]});
 
         try {
             if (cooldown.has(interaction.user.id)) {
@@ -81,7 +90,16 @@ module.exports = {
 
         } catch(err) {
             const errTag = client.config.errTag;
-            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\n${logMsg}`);
+            const errEmbed = new MessageEmbed()
+            .setTitle("ERROR")
+            .setColor("RED")
+            .setDescription(`${err}`)
+            .addFields(
+                { name: "Command", value: `${commandName}`},
+                { name: "User", value: `<@!${interaction.user.id}>`},
+                { name: "Channel", value: `<#${interaction.channel.id}>`}
+            )
+            client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
         }
         
     }

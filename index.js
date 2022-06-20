@@ -48,15 +48,14 @@ client.on('interactionCreate', async interaction => {
     } catch (error) { //auto error 
         console.error(error);
         return interaction.reply({
-            content: 'There was an error while executing this command!',
+            content: `An **ERROR** occured! Kindly Contact - <@!${client.config.errTag}`,
             ephemeral: true
         });
     };
 });
 
-
 try{
-    client.on('message', async message => {
+    client.on('messageCreate', async message => {
         const mention = new RegExp(`^<@!?${client.user.id}>( |)$`);
         if (message.content.match(mention)) {
             message.reply({ content: "Hello! How can I help you?" })

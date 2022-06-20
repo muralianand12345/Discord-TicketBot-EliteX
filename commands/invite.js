@@ -1,8 +1,7 @@
 const {
     SlashCommandBuilder
 } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
-const {MessageActionRow, MessageButton } = require("discord.js");
+const {MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
 
 const cooldown = new Set();
 const cooldownTime = 10000; 
@@ -12,8 +11,17 @@ module.exports = {
         .setName('invite')
         .setDescription("Sends EliteX RP Server Invite Link"),
     async execute(interaction, client) {
-        const logMsg = `Command Used: \`INVITE\` \nUser: <@!${interaction.user.id}> \nChannel: <#${interaction.channel.id}>`;
-        client.channels.cache.get(client.config.errorLog).send(logMsg);
+        const commandName = "INVITE";
+
+        const logEmbed = new MessageEmbed()
+        .setColor("GREEN")
+        .addFields(
+            { name: "Command", value: `${commandName}`},
+            { name: "User", value: `<@!${interaction.user.id}>`},
+            { name: "Channel", value: `<#${interaction.channel.id}>`}
+        )
+        
+        client.channels.cache.get(client.config.errorLog).send({ embeds: [logEmbed]});
         
         try {
             if (cooldown.has(interaction.user.id)) {
@@ -44,7 +52,16 @@ module.exports = {
             
         } catch(err) {
             const errTag = client.config.errTag;
-            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\n${logMsg}`);
+            const errEmbed = new MessageEmbed()
+            .setTitle("ERROR")
+            .setColor("RED")
+            .setDescription(`${err}`)
+            .addFields(
+                { name: "Command", value: `${commandName}`},
+                { name: "User", value: `<@!${interaction.user.id}>`},
+                { name: "Channel", value: `<#${interaction.channel.id}>`}
+            )
+            client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
         }
         
     }

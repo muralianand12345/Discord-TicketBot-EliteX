@@ -2,6 +2,8 @@ const {
     SlashCommandBuilder
 } = require('@discordjs/builders');
 
+const { MessageEmbed } = require('discord.js');
+
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('add')
@@ -11,8 +13,18 @@ module.exports = {
             .setDescription('Member to add to ticket')
             .setRequired(true)),
     async execute(interaction, client) {
-        const logMsg = `Command Used: \`ADD\` \nUser: <@!${interaction.user.id}> \nChannel: <#${interaction.channel.id}>`;
-        client.channels.cache.get(client.config.errorLog).send(logMsg);
+        const commandName = "ADD";
+
+        const logEmbed = new MessageEmbed()
+        .setColor("GREEN")
+        .addFields(
+            { name: "Command", value: `${commandName}`},
+            { name: "User", value: `<@!${interaction.user.id}>`},
+            { name: "Channel", value: `<#${interaction.channel.id}>`}
+        )
+        
+        client.channels.cache.get(client.config.errorLog).send({ embeds: [logEmbed]});
+
         try{
             const chan = client.channels.cache.get(interaction.channelId);
             const user = interaction.options.getUser('target');
@@ -49,8 +61,16 @@ module.exports = {
 
         } catch(err) {
             const errTag = client.config.errTag;
-            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\n${logMsg}`);
-
+            const errEmbed = new MessageEmbed()
+            .setTitle("ERROR")
+            .setColor("RED")
+            .setDescription(`${err}`)
+            .addFields(
+                { name: "Command", value: `${commandName}`},
+                { name: "User", value: `<@!${interaction.user.id}>`},
+                { name: "Channel", value: `<#${interaction.channel.id}>`}
+            )
+            client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
         } 
         
     },

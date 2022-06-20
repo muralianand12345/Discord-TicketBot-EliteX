@@ -197,9 +197,18 @@ module.exports = {
         };
 
     } catch(err){
-        const logMsg = `File \`interactionOld.js\``;
+        const commandName = "interactionOld.js";
         const errTag = client.config.errTag;
-        client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\n${logMsg}`);
+        const errEmbed = new MessageEmbed()
+        .setTitle("ERROR")
+        .setColor("RED")
+        .setDescription(`${err}`)
+        .addFields(
+            { name: "File", value: `${commandName}`},
+            { name: "User", value: `<@!${interaction.user.id}>`},
+            { name: "Channel", value: `<#${interaction.channel.id}>`}
+        )
+        client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
     }
 
     },

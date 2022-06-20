@@ -53,7 +53,7 @@ module.exports = {
         const err_log=client.channels.cache.get(config.errorLog)
 
         const embed = new MessageEmbed()
-            .setColor("GREEN")
+            .setColor("ORANGE")
             .setTitle(`Bot Restart Completed and Online ❤️`)
             .setTimestamp();
         err_log.send({embeds:[embed]});

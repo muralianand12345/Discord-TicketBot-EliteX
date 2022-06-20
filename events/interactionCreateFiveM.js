@@ -334,8 +334,18 @@ module.exports = {
             });
         };
     } catch(err){
-        console.log(err);
-        errorSend.send(`**ERROR!** ${errTag} \n${err}\nCommand: \`Ticket Delete by Ticket Supporters\` \nChannel: <#${interaction.channel.id}>`);
+        const commandName = "interactionCreateFiveM.js";
+        const errTag = client.config.errTag;
+        const errEmbed = new MessageEmbed()
+        .setTitle("ERROR")
+        .setColor("RED")
+        .setDescription(`${err}`)
+        .addFields(
+            { name: "File", value: `${commandName}`},
+            { name: "User", value: `<@!${interaction.user.id}>`},
+            { name: "Channel", value: `<#${interaction.channel.id}>`}
+        )
+        client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
     }
     },
 };

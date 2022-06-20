@@ -12,9 +12,17 @@ module.exports = {
         .setName('reactionrole')
         .setDescription('Sends reaction role message'),
     async execute(interaction, client) {
+        const commandName = "REACTIONROLE";
+
+        const logEmbed = new MessageEmbed()
+        .setColor("GREEN")
+        .addFields(
+            { name: "Command", value: `${commandName}`},
+            { name: "User", value: `<@!${interaction.user.id}>`},
+            { name: "Channel", value: `<#${interaction.channel.id}>`}
+        )
         
-        const logMsg = `Command Used: \`REACTIONROLE\` \nUser: <@!${interaction.user.id}> \nChannel: <#${interaction.channel.id}>`;
-        client.channels.cache.get(client.config.errorLog).send(logMsg);
+        client.channels.cache.get(client.config.errorLog).send({ embeds: [logEmbed]});
 
         if (interaction.user.id != owner_ID) {
             return await interaction.reply({ content:"This command is not for you : )",ephemeral: true });
@@ -34,11 +42,27 @@ module.exports = {
                 .setEmoji(Emoji)
                 .setStyle('SECONDARY'),
             );
-        reactionRole.send({ embeds: [embed], components: [button] });
+            reactionRole.send({ embeds: [embed], components: [button] });
 
         }
-        sendMsg();
-        interaction.reply("`Reaction Sent Sucessfully!`");   
+
+        try{
+            sendMsg();
+            interaction.reply("`Reaction Sent Sucessfully!`");   
+        } catch(err){
+            const errTag = client.config.errTag;
+            const errEmbed = new MessageEmbed()
+            .setTitle("ERROR")
+            .setColor("RED")
+            .setDescription(`${err}`)
+            .addFields(
+                { name: "Command", value: `${commandName}`},
+                { name: "User", value: `<@!${interaction.user.id}>`},
+                { name: "Channel", value: `<#${interaction.channel.id}>`}
+            )
+            client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+        }
+        
         
     },
 };

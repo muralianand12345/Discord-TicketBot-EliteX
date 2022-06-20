@@ -1,6 +1,5 @@
 const {
-    SlashCommandBuilder,
-    time
+    SlashCommandBuilder
 } = require('@discordjs/builders');
 const wait = require('util').promisify(setTimeout);
 const owner_ID = require("../config.json").ownerID;
@@ -11,8 +10,17 @@ module.exports = {
         .setName('shutdown')
         .setDescription('Shutdowns Bot(Owner Only!)'),
     async execute(interaction, client) {
-        const logMsg = `Command Used: \`SHUTDOWN\` \nUser: <@!${interaction.user.id}> \nChannel: <#${interaction.channel.id}>`;
-        client.channels.cache.get(client.config.errorLog).send(logMsg);
+        const commandName = "SHUTDOWN";
+
+        const logEmbed = new MessageEmbed()
+        .setColor("GREEN")
+        .addFields(
+            { name: "Command", value: `${commandName}`},
+            { name: "User", value: `<@!${interaction.user.id}>`},
+            { name: "Channel", value: `<#${interaction.channel.id}>`}
+        )
+        
+        client.channels.cache.get(client.config.errorLog).send({ embeds: [logEmbed]});
         
         try {
             if (interaction.user.id != owner_ID) {
@@ -28,7 +36,16 @@ module.exports = {
             });   
         } catch(err) {
             const errTag = client.config.errTag;
-            client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\n${logMsg}`);
+            const errEmbed = new MessageEmbed()
+            .setTitle("ERROR")
+            .setColor("RED")
+            .setDescription(`${err}`)
+            .addFields(
+                { name: "Command", value: `${commandName}`},
+                { name: "User", value: `<@!${interaction.user.id}>`},
+                { name: "Channel", value: `<#${interaction.channel.id}>`}
+            )
+            client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
         }
         
     },
