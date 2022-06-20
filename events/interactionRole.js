@@ -9,7 +9,6 @@ module.exports = {
     name: 'interactionCreate',
     async execute(interaction, client) {
         try{
-            const errTag = client.config.errTag;
             const errorLog = client.config.errorLog;
             const errorSend = client.channels.cache.get(errorLog);
 
@@ -48,8 +47,16 @@ module.exports = {
                             )
                             client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
                         });
-    
-                        errorSend.send(`${User} \`removed ${Role1} Role\``);
+
+                        const rmEmbed = new MessageEmbed()
+                            .setTitle("REDM ROLE")
+                            .setColor("BLACK")
+                            .addFields(
+                                { name: "User", value: `${User}`},
+                                { name: "Removed", value: `${Role1}`}
+                            )
+                        errorSend.send({ embeds: [rmEmbed]});
+                        
                     } else {
                         let role = interaction.guild.roles.cache.get(`${RoleID1}`);
     
@@ -76,8 +83,14 @@ module.exports = {
                             )
                             client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
                         });
-                        
-                        errorSend.send(`${User} \`received ${Role1} Role\``);
+                        const getEmbed = new MessageEmbed()
+                            .setTitle("REDM ROLE")
+                            .setColor("BLACK")
+                            .addFields(
+                                { name: "User", value: `${User}`},
+                                { name: "Received", value: `${Role1}`}
+                            )
+                        errorSend.send({ embeds: [getEmbed]});
                     }
 
                     cooldown.add(interaction.user.id);
