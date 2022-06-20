@@ -3,6 +3,7 @@ const RoleID1 = require("../config.json").Role1ID;
 const wait = require('util').promisify(setTimeout);
 const cooldown = new Set();
 const cooldownTime = 60000; 
+const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     name: 'interactionCreate',
@@ -32,7 +33,21 @@ module.exports = {
                         await wait(1000);
                         await interaction.editReply({content:`${Role1} **has been removed!**`, ephemeral: true});
     
-                        User.roles.remove(role).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Unable to Give Role!\*\*\n<@!${interaction.user.id}>`)});
+                        User.roles.remove(role).catch(err => {
+                            const commandName = "interactionRole.js";
+                            const errTag = client.config.errTag;
+                            const errEmbed = new MessageEmbed()
+                            .setTitle("ERROR")
+                            .setColor("RED")
+                            .setDescription(`${err}`)
+                            .addFields(
+                                { name: "File", value: `${commandName}`},
+                                { name: "User", value: `<@!${interaction.user.id}>`},
+                                { name: "Channel", value: `<#${interaction.channel.id}>`},
+                                { name: "Line", value: "Unable to Remove Role!"}
+                            )
+                            client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+                        });
     
                         errorSend.send(`${User} \`removed ${Role1} Role\``);
                     } else {
@@ -46,7 +61,21 @@ module.exports = {
                         await wait(1000);
                         await interaction.editReply({content:`${Role1} **has been added!**`, ephemeral: true});
     
-                        User.roles.add(role).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Unable to Give Role!\*\*\n<@!${interaction.user.id}>`)});
+                        User.roles.add(role).catch(err => {
+                            const commandName = "interactionRole.js";
+                            const errTag = client.config.errTag;
+                            const errEmbed = new MessageEmbed()
+                            .setTitle("ERROR")
+                            .setColor("RED")
+                            .setDescription(`${err}`)
+                            .addFields(
+                                { name: "File", value: `${commandName}`},
+                                { name: "User", value: `<@!${interaction.user.id}>`},
+                                { name: "Channel", value: `<#${interaction.channel.id}>`},
+                                { name: "Line", value: "Unable to Give Role!"}
+                            )
+                            client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+                        });
                         
                         errorSend.send(`${User} \`received ${Role1} Role\``);
                     }

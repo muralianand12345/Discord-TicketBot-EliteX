@@ -1,4 +1,5 @@
 let hastebin = require('hastebin');
+const { MessageEmbed } = require("discord.js");
 
 module.exports = {
     name: 'interactionCreate',
@@ -16,8 +17,31 @@ module.exports = {
                 interaction.reply({
                     content: '**You have already created a ticket! Kindly Contact any \`Ticket Supporters\` if not!**',
                     ephemeral: true
-                }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Already Opened Error!\*\* \nChannel: <#${interaction.channel.id}>`)});
-                errorSend.send(`The User <@!${interaction.user.id}> has already opened a Ticket \n Unable to open a new Ticket(FIVEM)`);
+                }).catch(err => {
+                    const commandName = "interactionCreateFiveM.js";
+                    const errTag = client.config.errTag;
+                    const errEmbed = new MessageEmbed()
+                    .setTitle("ERROR")
+                    .setColor("RED")
+                    .setDescription(`${err}`)
+                    .addFields(
+                        { name: "File", value: `${commandName}`},
+                        { name: "User", value: `<@!${interaction.user.id}>`},
+                        { name: "Channel", value: `<#${interaction.channel.id}>`},
+                        { name: "Line", value: "Already Opened a Ticket!"}
+                    )
+                    client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+                });
+
+                const ticEmbed = new MessageEmbed()
+                .setColor("BLUE")
+                .setAuthor({ name: "FiveM"})
+                .setDescription("Unable to open a new Ticket")
+                .addFields(
+                    { name: 'User', value: `<@!${interaction.user.id}>`},
+                    { name: 'Reason', value: "has already opened a Ticket"}
+                )
+                errorSend.send({ embeds:[ticEmbed] });
                 return;
             };
 
@@ -42,7 +66,21 @@ module.exports = {
                 interaction.reply({
                     content: `Ticket created! <#${c.id}>`,
                     ephemeral: true
-                }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Not Opened Error!\*\* \nChannel: <#${interaction.channel.id}>`)});
+                }).catch(err => {
+                    const commandName = "interactionCreateFiveM.js";
+                    const errTag = client.config.errTag;
+                    const errEmbed = new MessageEmbed()
+                    .setTitle("ERROR")
+                    .setColor("RED")
+                    .setDescription(`${err}`)
+                    .addFields(
+                        { name: "File", value: `${commandName}`},
+                        { name: "User", value: `<@!${interaction.user.id}>`},
+                        { name: "Channel", value: `<#${interaction.channel.id}>`},
+                        { name: "Line", value: "Ticket Not Created"}
+                    )
+                    client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+                });
 
                 const embed = new client.discord.MessageEmbed()
                     .setColor('6d6ee8')
@@ -98,7 +136,21 @@ module.exports = {
                     content: `<@!${interaction.user.id}>`,
                     embeds: [embed],
                     components: [row]
-                }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Options Error!\*\* \nChannel: <#${interaction.channel.id}>`)});
+                }).catch(err => {
+                    const commandName = "interactionCreateFiveM.js";
+                    const errTag = client.config.errTag;
+                    const errEmbed = new MessageEmbed()
+                    .setTitle("ERROR")
+                    .setColor("RED")
+                    .setDescription(`${err}`)
+                    .addFields(
+                        { name: "File", value: `${commandName}`},
+                        { name: "User", value: `<@!${interaction.user.id}>`},
+                        { name: "Channel", value: `<#${interaction.channel.id}>`},
+                        { name: "Line", value: "Ticket Options Error"}
+                    )
+                    client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+                });
 
                 const collector = msg.createMessageComponentCollector({
                     componentType: 'SELECT_MENU',
@@ -134,7 +186,21 @@ module.exports = {
                                 opened.pin().then(() => {
                                     opened.channel.bulkDelete(1);
                                 });
-                            }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Option After Ticket Creation Error\*\* \nChannel: <#${interaction.channel.id}>`)});
+                            }).catch(err => {
+                                const commandName = "interactionCreateFiveM.js";
+                                const errTag = client.config.errTag;
+                                const errEmbed = new MessageEmbed()
+                                .setTitle("ERROR")
+                                .setColor("RED")
+                                .setDescription(`${err}`)
+                                .addFields(
+                                    { name: "File", value: `${commandName}`},
+                                    { name: "User", value: `<@!${interaction.user.id}>`},
+                                    { name: "Channel", value: `<#${interaction.channel.id}>`},
+                                    { name: "Line", value: "Option After Ticket"}
+                                )
+                                client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+                            });
                         };
                         if (i.values[0] == 'Ooc') {
                             c.edit({
@@ -183,7 +249,16 @@ module.exports = {
                                 };
                             }, 5000);
                         });
-                        errorSend.send(`<@!${interaction.user.id}> Menu Closed!\n No Category Selected(FIVEM)`);
+
+                        const ticEmbed2 = new MessageEmbed()
+                        .setColor("BLUE")
+                        .setAuthor({ name: "FIVEM"})
+                        .setDescription("Menu Closed")
+                        .addFields(
+                            { name: 'User', value: `<@!${interaction.user.id}>`},
+                            { name: 'Reason', value: "No Category Selected"}
+                        )
+                        errorSend.send({ embeds:[ticEmbed2] });
                     };
                 });
             });
@@ -245,7 +320,21 @@ module.exports = {
                                     deny: ['VIEW_CHANNEL'],
                                 },
                             ],
-                        }).catch(err => {})
+                        }).catch(err => {
+                            const commandName = "interactionCreateFiveM.js";
+                            const errTag = client.config.errTag;
+                            const errEmbed = new MessageEmbed()
+                            .setTitle("ERROR")
+                            .setColor("RED")
+                            .setDescription(`${err}`)
+                            .addFields(
+                                { name: "File", value: `${commandName}`},
+                                { name: "User", value: `<@!${interaction.user.id}>`},
+                                { name: "Channel", value: `<#${interaction.channel.id}>`},
+                                { name: "Line", value: "Ticket Close Error"}
+                            )
+                            client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+                        })
                         .then(async() => {
                             const embed = new client.discord.MessageEmbed()
                                 .setColor('6d6ee8')
@@ -291,7 +380,19 @@ module.exports = {
             });
         };
     } catch(err){
-        errorSend.send(`**ERROR!** ${errTag} \n${err}\nCommand: \`Ticket Delete by User\` \nChannel: <#${interaction.channel.id}>`);
+        const commandName = "interactionCreateFiveM.js";
+        const errTag = client.config.errTag;
+        const errEmbed = new MessageEmbed()
+        .setTitle("ERROR")
+        .setColor("RED")
+        .setDescription(`${err}`)
+        .addFields(
+            { name: "File", value: `${commandName}`},
+            { name: "User", value: `<@!${interaction.user.id}>`},
+            { name: "Channel", value: `<#${interaction.channel.id}>`},
+            { name: "Line", value: "Ticket Delete Error"}
+        )
+        client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
     }
 
     try{
@@ -302,7 +403,21 @@ module.exports = {
 
             interaction.reply({
                 content: 'Saving messages ...'
-            }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Save Messages Error!\*\* \nChannel: <#${interaction.channel.id}>`)});
+            }).catch(err => {
+                const commandName = "interactionCreateFiveM.js";
+                const errTag = client.config.errTag;
+                const errEmbed = new MessageEmbed()
+                .setTitle("ERROR")
+                .setColor("RED")
+                .setDescription(`${err}`)
+                .addFields(
+                    { name: "File", value: `${commandName}`},
+                    { name: "User", value: `<@!${interaction.user.id}>`},
+                    { name: "Channel", value: `<#${interaction.channel.id}>`},
+                    { name: "Line", value: "Saving Message Interaction"}
+                )
+                client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+            });
 
             const chanTopic = BigInt(chan.topic) - BigInt(1);
 
@@ -314,7 +429,21 @@ module.exports = {
                 hastebin.createPaste(a, {
                         contentType: 'text/plain',
                         server: 'https://www.toptal.com/developers/hastebin/'
-                    }, {}).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Skipped The Ticket Log Warning!\*\* \nChannel: <#${interaction.channel.id}>`)})
+                    }, {}).catch(err => {
+                        const commandName = "interactionCreateFiveM.js";
+                        const errTag = client.config.errTag;
+                        const errEmbed = new MessageEmbed()
+                        .setTitle("ERROR")
+                        .setColor("RED")
+                        .setDescription(`${err}`)
+                        .addFields(
+                            { name: "File", value: `${commandName}`},
+                            { name: "User", value: `<@!${interaction.user.id}>`},
+                            { name: "Channel", value: `<#${interaction.channel.id}>`},
+                            { name: "Line", value: "Ticket Log Error (Unable to Save)"}
+                        )
+                        client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+                    })
                     .then(function(urlToPaste) {
                         const embed = new client.discord.MessageEmbed()
                             .setAuthor({name:'Logs Ticket', iconURL:'https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png'})
@@ -327,10 +456,38 @@ module.exports = {
                         }).catch(err => {console.log(err)});
                         chan.send("Deleting the channel...");
 
-                        setTimeout( () => chan.delete().catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Spamming\*\*`)}),5000);
+                        setTimeout( () => chan.delete().catch(err => {
+                            const commandName = "interactionCreateFiveM.js";
+                            const errTag = client.config.errTag;
+                            const errEmbed = new MessageEmbed()
+                            .setTitle("ERROR")
+                            .setColor("RED")
+                            .setDescription(`${err}`)
+                            .addFields(
+                                { name: "File", value: `${commandName}`},
+                                { name: "User", value: `<@!${interaction.user.id}>`},
+                                { name: "Channel", value: `<#${interaction.channel.id}>`},
+                                { name: "Line", value: "Spamming"}
+                            )
+                            client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+                        }),5000);
 
                         
-                    }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*HastBin Log Error!\*\* \nChannel: <#${interaction.channel.id}>`)});
+                    }).catch(err => {
+                        const commandName = "interactionCreateFiveM.js";
+                        const errTag = client.config.errTag;
+                        const errEmbed = new MessageEmbed()
+                        .setTitle("ERROR")
+                        .setColor("RED")
+                        .setDescription(`${err}`)
+                        .addFields(
+                            { name: "File", value: `${commandName}`},
+                            { name: "User", value: `<@!${interaction.user.id}>`},
+                            { name: "Channel", value: `<#${interaction.channel.id}>`},
+                            { name: "Line", value: "HasteBin Error"}
+                        )
+                        client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+                    });
             });
         };
     } catch(err){

@@ -1,7 +1,7 @@
 const moment = require('moment');
 const tz = require('moment-timezone');
-const config = require('../config.json')
-const { MessageEmbed } = require('discord.js')
+const config = require('../config.json');
+const { MessageEmbed } = require("discord.js");
 
 module.exports = {
     name: 'ready',

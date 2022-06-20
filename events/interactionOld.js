@@ -1,5 +1,6 @@
 // For Old Users
 let hastebin = require('hastebin');
+const { MessageEmbed} = require("discord.js");
 
 module.exports = {
     name: 'interactionCreate',
@@ -16,7 +17,7 @@ module.exports = {
                 interaction.reply({
                     content: '**You Have Already Created a Ticket!**',
                     ephemeral: true
-                }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Already Opened Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
+                }).catch(err => {});
                 errorSend.send(`The User <@!${interaction.user.id}> has already opened a Ticket \n Unable to open a new Ticket(OLD)`);
                 return;
             };
@@ -25,7 +26,7 @@ module.exports = {
                 interaction.reply({
                     content: '**You Have Already Created a Ticket!**',
                     ephemeral: true
-                }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Already Opened Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
+                }).catch(err => {});
                 errorSend.send(`The User <@!${interaction.user.id}> has already opened a Ticket \n Unable to open a new Ticket(FIVEM)`);
                 return;
             };
@@ -34,7 +35,7 @@ module.exports = {
                 interaction.reply({
                     content: '**You Have Already Created a Ticket!**',
                     ephemeral: true
-                }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Already Opened Error!\*\* \nChannel: \`${interaction.channel.id} (${interaction.channel.name})\`\n`)});
+                }).catch(err => {});
                 errorSend.send(`The User <@!${interaction.user.id}> has already opened a Ticket \n Unable to open a new Ticket(REDM)`);
                 return;
             };
@@ -149,9 +150,6 @@ module.exports = {
         };
 
     } catch(err){
-        const logMsg = `File \`interactionOld.js\``;
-        const errTag = client.config.errTag;
-        client.channels.cache.get(client.config.errorLog).send(`**ERROR!** ${errTag} \n${err}\n${logMsg}`);
     }
 
     try{
@@ -162,7 +160,7 @@ module.exports = {
 
             interaction.reply({
                 content: 'Saving messages ...'
-            }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Ticket Save Messages Error!\*\* \nChannel: <#${interaction.channel.id}>`)});
+            }).catch(err => {});
 
             chan.messages.fetch().then(async(messages) => {
 
@@ -175,7 +173,7 @@ module.exports = {
                 hastebin.createPaste(a, {
                         contentType: 'text/plain',
                         server: 'https://www.toptal.com/developers/hastebin/'
-                    }, {}).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Skipped The Ticket Log Warning!\*\* \nChannel: <#${interaction.channel.id}>`)})
+                    }, {}).catch(err => {})
 
                     .then(function(urlToPaste) {
                         const embed = new client.discord.MessageEmbed()
@@ -190,9 +188,9 @@ module.exports = {
 
                         chan.send("Deleting the channel...");
                         
-                        setTimeout( () => chan.delete().catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*Spamming\*\*`)}),5000);
+                        setTimeout( () => chan.delete().catch(err => {}),5000);
 
-                    }).catch(err => {errorSend.send(`**ERROR!** ${errTag} \n${err}\n\*\*HastBin Log Error!\*\* \nChannel: <#${interaction.channel.id}>`)});
+                    }).catch(err => {});
             });
         };
 
