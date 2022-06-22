@@ -303,6 +303,7 @@ module.exports = {
                         components: []
                     });
 
+                    const chanID = i.channel.id;
                     const ChanTopic = BigInt(chan.topic) - BigInt(2);
 
                     chan.edit({
@@ -332,7 +333,7 @@ module.exports = {
                             .addFields(
                                 { name: "File", value: `${commandName}`},
                                 { name: "User", value: `<@!${interaction.user.id}>`},
-                                { name: "Channel", value: `<#${interaction.channel.id}>`},
+                                { name: "Channel", value: `<#${chanID}>`},
                                 { name: "Line", value: "Ticket Close Error"}
                             )
                             client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });

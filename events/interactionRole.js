@@ -52,7 +52,7 @@ module.exports = {
                             .setTitle("REDM ROLE")
                             .setColor("BLACK")
                             .addFields(
-                                { name: "User", value: `${User}`},
+                                { name: "User", value: `<@!${interaction.user.id}>`},
                                 { name: "Removed", value: `${Role1}`}
                             )
                         errorSend.send({ embeds: [rmEmbed]});
@@ -87,7 +87,7 @@ module.exports = {
                             .setTitle("REDM ROLE")
                             .setColor("BLACK")
                             .addFields(
-                                { name: "User", value: `${User}`},
+                                { name: "User", value: `<@!${interaction.user.id}>`},
                                 { name: "Received", value: `${Role1}`}
                             )
                         errorSend.send({ embeds: [getEmbed]});
