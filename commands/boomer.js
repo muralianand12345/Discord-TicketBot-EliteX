@@ -23,6 +23,7 @@ module.exports = {
         )
         
         client.channels.cache.get(client.config.errorLog).send({ embeds: [logEmbed]});
+        console.log("Hello World Test for Terminal Logging : )")
 
         try {
             if (cooldown.has(interaction.user.id)) {

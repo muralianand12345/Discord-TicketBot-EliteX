@@ -77,7 +77,7 @@ module.exports = {
                     .addFields(
                         { name: "File", value: `${commandName}`},
                         { name: "User", value: `<@!${interaction.user.id}>`},
-                        { name: "Channel", value: `<#${interaction.channel.id}>`},
+                        { name: "Channel", value: `<#${c.id}>`},
                         { name: "Line", value: "Ticket Not Created"}
                     )
                     client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
