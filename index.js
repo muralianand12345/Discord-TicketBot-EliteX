@@ -19,6 +19,13 @@ client.discord = Discord;
 //config
 client.config = config;
 
+//console read and print
+let console = process.openStdin()
+console.addListener("data", res => {
+    let info = res.toString().trim().split(/ +/g)
+    client.channels.cache.get(client.config.consoleChannel).send(info.join(" "));
+});
+
 //command file auto read
 client.commands = new Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -48,7 +55,7 @@ client.on('interactionCreate', async interaction => {
     } catch (error) { //auto error 
         console.error(error);
         return interaction.reply({
-            content: `An **ERROR** occured! Kindly Contact - <@!${client.config.errTag}`,
+            content: `An **ERROR** occured! Kindly Contact - ${client.config.errTag}`,
             ephemeral: true
         });
     };
@@ -56,10 +63,31 @@ client.on('interactionCreate', async interaction => {
 
 try{
     client.on('messageCreate', async message => {
+        //ignore bots
+        if (message.author.bot) return;
+
+        //reply when tagged
         const mention = new RegExp(`^<@!?${client.user.id}>( |)$`);
         if (message.content.match(mention)) {
-            message.reply({ content: "Hello! How can I help you?" })
+            const botReply = [
+                "Hello! How can I help you?",
+                "Yes, how can I help you?",
+                "Raise a ticket, we are happy to help you!",
+                "At your service ❤️",
+                "Yes Sir!",
+                "Official EliteX Roleplay Discord Bot"
+            ];
+            const randomIndex = Math.floor(Math.random() * (botReply.length - 1) + 1);
+            const newActivity = botReply[randomIndex];
+
+            message.reply({ content: newActivity })
         }
+
+        //debugging
+        /*if(message.author.id !== '678402714765361182') {
+            return message.reply({ content: "This command is for developers Only! "})
+        }*/
+
     });
 } catch(err) {
     const errTag = client.config.errTag;
