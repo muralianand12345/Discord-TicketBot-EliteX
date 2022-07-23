@@ -1,0 +1,6 @@
+(node:431914) DeprecationWarning: Passing strings for MessageEmbed#setAuthor is deprecated. Pass a sole object instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:431914) DeprecationWarning: Passing strings for MessageEmbed#setFooter is deprecated. Pass a sole object instead.
+(node:530853) DeprecationWarning: Passing strings for MessageEmbed#setAuthor is deprecated. Pass a sole object instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:530853) DeprecationWarning: Passing strings for MessageEmbed#setFooter is deprecated. Pass a sole object instead.

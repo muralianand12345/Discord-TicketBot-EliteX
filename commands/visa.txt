@@ -1,0 +1,94 @@
+const {
+    SlashCommandBuilder
+} = require('@discordjs/builders');
+const { MessageEmbed } = require("discord.js");
+const RoleID3 = require("../config.json").Role3ID;
+const RoleID2 = require("../config.json").Role2ID;
+const Emoji = require("../config.json").Emoji;
+const Role2 = require("../config.json").Role2;
+
+module.exports = {
+    data: new SlashCommandBuilder()
+        .setName('visa')
+        .setDescription("Immigration Officer only command")
+        .addUserOption(
+            option =>
+            option.setName('user')
+            .setDescription('Applicant')
+            .setRequired(true)
+        ),
+    async execute(interaction, client) {
+        const commandName = "VISA";
+
+        const logEmbed = new MessageEmbed()
+        .setColor("GREEN")
+        .addFields(
+            { name: "Command", value: `${commandName}`},
+            { name: "User", value: `<@!${interaction.user.id}>`},
+            { name: "Channel", value: `<#${interaction.channel.id}>`}
+        )
+        
+        client.channels.cache.get(client.config.errorLog).send({ embeds: [logEmbed]});
+
+        const user = interaction.options.getUser('user');
+        const Mention = client.guilds.cache.get(interaction.guild.id).members.cache.get(user.id);
+
+        try{
+            if ( Mention.roles.cache?.has(`${RoleID3}`)) {
+                let role = interaction.guild.roles.cache.get(`${RoleID2}`);
+
+                Mention.roles.add(role)/*.catch(err => {
+                    const commandName = "visa.js";
+                    const errTag = client.config.errTag;
+                    const errEmbed = new MessageEmbed()
+                    .setTitle("ERROR")
+                    .setColor("RED")
+                    .setDescription(`${err}`)
+                    .addFields(
+                        { name: "File", value: `${commandName}`},
+                        { name: "User", value: `<@!${interaction.user.id}>`},
+                        { name: "Channel", value: `<#${interaction.channel.id}>`},
+                        { name: "Line", value: "Unable to Give Role!"}
+                    )
+                    client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+                });*/
+
+                /*const mainPage = new MessageEmbed()
+                    .setAuthor({ name: `${interaction.user.username}`, iconURL: `${interaction.user.displayAvatarURL()}`})
+                    .setColor('GREEN')
+                    .addFields(
+                        {
+                            name: `To`,
+                            value: `<@${mention.id}>`,
+                            inline: true,
+                        },
+                        {
+                            name: `By`,
+                            value: `<@${interaction.user.id}>`,
+                            inline: true,
+                        }
+                    )
+    
+                    interaction.reply({content: `**${Role2}** Role Given To <@${mention.id}>`, ephemeral: true})*/
+                    interaction.reply({content: "Role given to the given user!"});
+                    client.channels.cache.get(client.config.errorLog).send({embeds: [mainPage] });
+
+            }
+            
+     
+        } catch(err) {
+            const errTag = client.config.errTag;
+            const errEmbed = new MessageEmbed()
+            .setTitle("ERROR")
+            .setColor("RED")
+            .setDescription(`${err}`)
+            .addFields(
+                { name: "Command", value: `${commandName}`},
+                { name: "User", value: `<@!${interaction.user.id}>`},
+                { name: "Channel", value: `<#${interaction.channel.id}>`}
+            )
+            client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+        }
+        
+    }
+};

@@ -1,0 +1,36 @@
+EliteX Support#7998 Bot is ready to rock n roll!
+Developed For EliteX Rp <3
+Error Has been occured at Time and Date!
+No Member/RoleCheckError!
+EliteX Support#7998 Bot is ready to rock n roll!
+Developed For EliteX Rp <3
+Error Has been occured at Time and Date!
+DiscordAPIError: Unknown interaction
+    at RequestHandler.execute (/home/murali/DiscordBot/EliteXBot/node_modules/discord.js/src/rest/RequestHandler.js:350:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async RequestHandler.push (/home/murali/DiscordBot/EliteXBot/node_modules/discord.js/src/rest/RequestHandler.js:51:14)
+    at async CommandInteraction.reply (/home/murali/DiscordBot/EliteXBot/node_modules/discord.js/src/structures/interfaces/InteractionResponses.js:99:5) {
+  method: 'post',
+  path: '/interactions/959866206574235689/aW50ZXJhY3Rpb246OTU5ODY2MjA2NTc0MjM1Njg5OnZMbGV2Y0F2eVFrTW1qNUk4NmRCUERQbThHa1ZxVm4yNWRvclpIRlI0eDJZSFNvVzM5ZUJOMjMwbTZrU2swekIyM3o4aTFRcTlHaVVNUTlZVEdmSDJ6ZlRpRUU3MUZZWUdoQXFRcGxnd1VCMUNXRkxSeERJZ2gzMk1wQXBlOUFN/callback',
+  code: 10062,
+  httpStatus: 404,
+  requestData: { json: { type: 4, data: [Object] }, files: [] }
+}
+EliteX Support#7998 Bot is ready to rock n roll!
+Developed For EliteX Rp <3
+Error Has been occured at Time and Date!
+DiscordAPIError: Unknown interaction
+    at RequestHandler.execute (/home/murali/DiscordBot/EliteXBot/node_modules/discord.js/src/rest/RequestHandler.js:350:13)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async RequestHandler.push (/home/murali/DiscordBot/EliteXBot/node_modules/discord.js/src/rest/RequestHandler.js:51:14)
+    at async CommandInteraction.reply (/home/murali/DiscordBot/EliteXBot/node_modules/discord.js/src/structures/interfaces/InteractionResponses.js:99:5) {
+  method: 'post',
+  path: '/interactions/962626767842066462/aW50ZXJhY3Rpb246OTYyNjI2NzY3ODQyMDY2NDYyOjRaSGdKNEo5bTc2a253TlZ5SXFHcjNUdldZQ2ZUQmVCZ2N0WnE5ZGQ3SWxUSEdsVGo4TzlqdDZXMHFGZnpvS2hQelk2anhEZ1pRZk9jbHp6OEVFdnY2ZmhDOEE3TTduUVZ4S3RicHJpaUgxem5DbGpiTkd0M25jNXZ1dkdMRFhI/callback',
+  code: 10062,
+  httpStatus: 404,
+  requestData: { json: { type: 4, data: [Object] }, files: [] }
+}
+EliteX Support#7998 Bot is ready to rock n roll!
+Developed For EliteX Rp <3
+Date and Time has been disabled
