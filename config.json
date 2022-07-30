@@ -1,57 +1,80 @@
 {
     "ownerID": "678402714765361182",
-    "errTag":"<@678402714765361182>",
     "consoleChannel": "",
-    
-    "ChannelID":"",
-    "Role1": "",
-    "Role1ID": "",
-    "Emoji": "<:muralianand:986286100232421466>",
 
-    "parentOpened": "",
+    "REDM_CHAN": {
+        "CHAN_ID": "",
+        "ROLE": "",
+        "ROLE_ID": "",
+        "EMOJI": "<:muralianand:986286100232421466>"
+    },
 
-    "parentCLFivem": "",
-    "parentCLRedm": "",
+    "FIVEM_TICKET": {
+        "MAIN": "",
+        "OOC": "",
+        "CL": "",
+        "SUPPORT": "",
+        "BUG": "",
+        "CHAR": "",
+        "PLANNED": "",
+        "OTHER": "",
+        "CLOSED": "",
+        "ROLE_SUPPORT": {
+            "ID": ""
+        },
+        "TICKET_MSG": {
+            "CHAN_ID": ""
+        },
+        "LOG": {
+            "CHAN_ID": ""
+        }
+    },
 
-    "parentOOCFivem": "",
-    "parentOOCRedm": "",
+    "REDM_TICKET": {
+        "MAIN": "",
+        "OOC": "",
+        "CL": "",
+        "SUPPORT": "",
+        "BUG": "",
+        "CHAR": "",
+        "PLANNED": "",
+        "OTHER": "",
+        "CLOSED": "",
+        "ROLE_SUPPORT": {
+            "ID": ""
+        },
+        "TICKET_MSG": {
+            "CHAN_ID": ""
+        },
+        "LOG": {
+            "CHAN_ID": ""
+        }
+    },
 
-    "parentBugsFivem": "",
-    "parentBugsRedm": "",
+    "ERR_LOG": {
+        "CHAN_ID": "",
+        "ERR_TAG":"<@678402714765361182>"
+    },
 
-    "parentOthersFivem": "",
-    "parentOthersRedm": "",
+    "DATE": {
+        "ENABLE": "false",
+        "CHAN_ID": "",
+        "TIMEZONE":"Asia/Kolkata",
+        "FORMATDATE":"DD MMMM YYYY",
+        "UPDATE_INTERVAL":"600000"
+    },
 
-    "parentSupportersFivem": "",
-    "parentSupportersRedm": "",
-
-    "parentPlannedFivem": "",
-    "parentPlannedRedm": "",
-
-    "parentCharacterFivem": "",
-    "parentCharacterRedm": "",
-
-    "parentClose": "",
-
-    "roleSupport": "",
-
-    "DateNTime":"false",
-    "dateChannel":"",
-    "TIMEZONE":"Asia/Kolkata",
-    "FORMATDate":"DD MMMM YYYY",
-    "UPDATE_INTERVAL":"600000",
-
-    "logsTicket": "",
-    "errorLog": "",
-
-    "role1ID": "",
-    "role2ID": "",
-    
-    "ticketChannelfivem": "",
-    "ticketChannelredm": "",
+    "ROLE_CHECK": {
+        "ROLE_1": {
+            "ID": ""
+        },
+        "ROLE_2": {
+            "ID": ""
+        }
+    },
 
     "TagMember": "COMMUNITY",
     "footerText": "EliteX RolePlay",
-    "eliteximage": "https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png"
+    "discordBotImage": "https://cdn.discordapp.com/attachments/782584284321939468/784745798789234698/2-Transparent.png"
 
 }
