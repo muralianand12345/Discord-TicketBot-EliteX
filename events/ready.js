@@ -26,14 +26,14 @@ module.exports = {
             }, 5000);
 
 
-        const needDatenTime = client.config.DateNTime;
+        const needDatenTime = client.config.DATE.ENABLE;
 
         if (needDatenTime == "true") {
             console.log('Date and Time has been enabled');
-            const TIMEZONE = client.config.TIMEZONE;
-            const FORMAT = client.config.FORMATDate;
-            const CHANNEL_ID = client.config.dateChannel;
-            const UPDATE_INTERVAL = client.config.UPDATE_INTERVAL;
+            const TIMEZONE = client.config.DATE.TIMEZONE;
+            const FORMAT = client.config.DATE.FORMATDATE;
+            const CHANNEL_ID = client.config.DATE.CHAN_ID;
+            const UPDATE_INTERVAL = client.config.DATE.UPDATE_INTERVAL;
 
             const timeNow = moment().tz(TIMEZONE).format(FORMAT);
             const clockChannel = client.channels.cache.get(CHANNEL_ID);
@@ -50,7 +50,7 @@ module.exports = {
             console.log('Error Has been occured at Time and Date!');
         }
 
-        const err_log=client.channels.cache.get(config.errorLog)
+        const err_log=client.channels.cache.get(config.ERR_LOG.CHAN_ID)
 
         const embed = new MessageEmbed()
             .setColor("ORANGE")

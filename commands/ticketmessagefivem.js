@@ -20,7 +20,7 @@ module.exports = {
             { name: "Channel", value: `<#${interaction.channel.id}>`}
         )
 
-        client.channels.cache.get(client.config.errorLog).send({ embeds: [logEmbed]});
+        client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send({ embeds: [logEmbed]});
         
         if (interaction.user.id != owner_ID) {
             await interaction.reply({content: "SENDING...",ephemeral: true});
@@ -31,7 +31,7 @@ module.exports = {
         }
         
         try{
-            const Ticket = client.channels.cache.get(client.config.ticketChannelfivem);
+            const Ticket = client.channels.cache.get(client.config.FIVEM_TICKET.TICKET_MSG.CHAN_ID);
 
             function sendTicketMSG() {
 
@@ -59,7 +59,7 @@ module.exports = {
             interaction.reply("Ticket Message Has Been Sent!")
 
         } catch(err) {
-            const errTag = client.config.errTag;
+            const errTag = client.config.ERR_LOG.ERR_TAG;
             const errEmbed = new MessageEmbed()
             .setTitle("ERROR")
             .setColor("RED")
@@ -69,7 +69,7 @@ module.exports = {
                 { name: "User", value: `<@!${interaction.user.id}>`},
                 { name: "Channel", value: `<#${interaction.channel.id}>`}
             )
-            client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+            client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send({ content: `${errTag}`, embeds: [errEmbed] });
         }
         
     }

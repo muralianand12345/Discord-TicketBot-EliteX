@@ -5,8 +5,8 @@ module.exports = {
     name: 'interactionCreate',
     async execute(interaction, client) {
 
-        const errTag = client.config.errTag;
-        const errChan = client.config.errorLog;
+        const errTag = client.config.ERR_LOG.ERR_TAG;
+        const errChan = client.config.ERR_LOG.CHAN_ID;
         const errorSend = client.channels.cache.get(errChan);
 
         if (!interaction.isButton()) return;
@@ -20,7 +20,7 @@ module.exports = {
                     ephemeral: true
                 }).catch(err => {
                     const commandName = "interactionCreateRedM.js";
-                    const errTag = client.config.errTag;
+                    const errTag = client.config.ERR_LOG.ERR_TAG;
                     const errEmbed = new MessageEmbed()
                     .setTitle("ERROR")
                     .setColor("RED")
@@ -31,7 +31,7 @@ module.exports = {
                         { name: "Channel", value: `<#${interaction.channel.id}>`},
                         { name: "Line", value: "Already Opened a Ticket!"}
                     )
-                    client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+                    client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send({ content: `${errTag}`, embeds: [errEmbed] });
                 });
 
                 const ticEmbed = new MessageEmbed()
@@ -47,14 +47,14 @@ module.exports = {
             };
 
             interaction.guild.channels.create(`redm-ticket-${interaction.user.username}`, {
-                parent: client.config.parentOpened,
+                parent: client.config.REDM_TICKET.MAIN,
                 topic: InteID.toString(),
                 permissionOverwrites: [{
                         id: interaction.user.id,
                         allow: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
                     },
                     {
-                        id: client.config.roleSupport,
+                        id: client.config.REDM_TICKET.ROLE_SUPPORT.ID,
                         allow: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
                     },
                     {
@@ -69,7 +69,7 @@ module.exports = {
                     ephemeral: true
                 }).catch(err => {
                     const commandName = "interactionCreateRedM.js";
-                    const errTag = client.config.errTag;
+                    const errTag = client.config.ERR_LOG.ERR_TAG;
                     const errEmbed = new MessageEmbed()
                     .setTitle("ERROR")
                     .setColor("RED")
@@ -80,7 +80,7 @@ module.exports = {
                         { name: "Channel", value: `<#${c.id}>`},
                         { name: "Line", value: "Ticket Not Created"}
                     )
-                    client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+                    client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send({ content: `${errTag}`, embeds: [errEmbed] });
                 });
 
                 const embed = new client.discord.MessageEmbed()
@@ -101,9 +101,9 @@ module.exports = {
                                 emoji: '📝',
                             },
                             {
-                                label: 'COMBAT LOGGING',
-                                value: 'CombatLogging',
-                                emoji: '🗡️',
+                                label: 'CONNECTIVITY ISSUUE',
+                                value: 'ConnectivityIssue',
+                                emoji: '🔗',
                             },
                             {
                                 label: 'BUGS',
@@ -139,7 +139,7 @@ module.exports = {
                     components: [row]
                 }).catch(err => {
                     const commandName = "interactionCreateRedM.js";
-                    const errTag = client.config.errTag;
+                    const errTag = client.config.ERR_LOG.ERR_TAG;
                     const errEmbed = new MessageEmbed()
                     .setTitle("ERROR")
                     .setColor("RED")
@@ -150,7 +150,7 @@ module.exports = {
                         { name: "Channel", value: `<#${interaction.channel.id}>`},
                         { name: "Line", value: "Ticket Options Error"}
                     )
-                    client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+                    client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send({ content: `${errTag}`, embeds: [errEmbed] });
                 });
 
                 const collector = msg.createMessageComponentCollector({
@@ -189,7 +189,7 @@ module.exports = {
                                 });
                             }).catch(err => {
                                 const commandName = "interactionCreateRedM.js";
-                                const errTag = client.config.errTag;
+                                const errTag = client.config.ERR_LOG.ERR_TAG;
                                 const errEmbed = new MessageEmbed()
                                 .setTitle("ERROR")
                                 .setColor("RED")
@@ -200,42 +200,42 @@ module.exports = {
                                     { name: "Channel", value: `<#${interaction.channel.id}>`},
                                     { name: "Line", value: "Option After Ticket"}
                                 )
-                                client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+                                client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send({ content: `${errTag}`, embeds: [errEmbed] });
                             });
                         };
                         if (i.values[0] == 'Ooc') {
                             c.edit({
-                                parent: client.config.parentOOCRedm
+                                parent: client.config.REDM_TICKET.OOC
                             });
                         };
-                        if (i.values[0] == 'CombatLogging') {
+                        if (i.values[0] == 'ConnectivityIssue') {
                             c.edit({
-                                parent: client.config.parentCLRedm
+                                parent: client.config.REDM_TICKET.CL
                             });
                         };
                         if (i.values[0] == 'Bugs') {
                             c.edit({
-                                parent: client.config.parentBugsRedm
+                                parent: client.config.REDM_TICKET.BUG
                             });
                         };
                         if (i.values[0] == 'Supporters') {
                             c.edit({
-                                parent: client.config.parentSupportersRedm
+                                parent: client.config.REDM_TICKET.SUPPORT
                             });
                         };
                         if (i.values[0] == 'Planned') {
                             c.edit({
-                                parent: client.config.parentPlannedRedm
+                                parent: client.config.REDM_TICKET.PLANNED
                             });
                         };
                         if (i.values[0] == 'Character') {
                             c.edit({
-                                parent: client.config.parentCharacterRedm
+                                parent: client.config.REDM_TICKET.CHAR
                             });
                         };
                         if (i.values[0] == 'Others') {
                             c.edit({
-                                parent: client.config.parentOthersRedm
+                                parent: client.config.REDM_TICKET.OTHER
                             });
                         };
                     };
@@ -308,14 +308,14 @@ module.exports = {
 
                     chan.edit({
                             name: `closed-${chan.name}`,
-                            parent: client.config.parentClose,
+                            parent: client.config.REDM_TICKET.CLOSED,
                             permissionOverwrites: [
                                 {
                                     id: client.users.cache.get(ChanTopic.toString()), //error
                                     deny: ['SEND_MESSAGES','VIEW_CHANNEL'],
                                 },
                                 {
-                                    id: client.config.roleSupport,
+                                    id: client.config.REDM_TICKET.ROLE_SUPPORT.ID,
                                     allow: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
                                 },
                                 {
@@ -325,7 +325,7 @@ module.exports = {
                             ],
                         }).catch(err => {
                             const commandName = "interactionCreateRedM.js";
-                            const errTag = client.config.errTag;
+                            const errTag = client.config.ERR_LOG.ERR_TAG;
                             const errEmbed = new MessageEmbed()
                             .setTitle("ERROR")
                             .setColor("RED")
@@ -336,7 +336,7 @@ module.exports = {
                                 { name: "Channel", value: `<#${chanID}>`},
                                 { name: "Line", value: "Ticket Close Error"}
                             )
-                            client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+                            client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send({ content: `${errTag}`, embeds: [errEmbed] });
                         })
                         .then(async() => {
                             const embed = new client.discord.MessageEmbed()
@@ -384,7 +384,7 @@ module.exports = {
         };
     } catch(err){
         const commandName = "interactionCreateRedM.js";
-        const errTag = client.config.errTag;
+        const errTag = client.config.ERR_LOG.ERR_TAG;
         const errEmbed = new MessageEmbed()
         .setTitle("ERROR")
         .setColor("RED")
@@ -395,7 +395,7 @@ module.exports = {
             { name: "Channel", value: `<#${interaction.channel.id}>`},
             { name: "Line", value: "Ticket Delete Error"}
         )
-        client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+        client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send({ content: `${errTag}`, embeds: [errEmbed] });
     }
 
     try{
@@ -408,7 +408,7 @@ module.exports = {
                 content: 'Saving messages ...'
             }).catch(err => {
                 const commandName = "interactionCreateRedM.js";
-                const errTag = client.config.errTag;
+                const errTag = client.config.ERR_LOG.ERR_TAG;
                 const errEmbed = new MessageEmbed()
                 .setTitle("ERROR")
                 .setColor("RED")
@@ -419,7 +419,7 @@ module.exports = {
                     { name: "Channel", value: `<#${interaction.channel.id}>`},
                     { name: "Line", value: "Saving Message Interaction"}
                 )
-                client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+                client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send({ content: `${errTag}`, embeds: [errEmbed] });
             });
 
             const chanTopic = BigInt(chan.topic) - BigInt(2);
@@ -434,7 +434,7 @@ module.exports = {
                         server: 'https://www.toptal.com/developers/hastebin/'
                     }, {}).catch(err => {
                         const commandName = "interactionCreateRedM.js";
-                        const errTag = client.config.errTag;
+                        const errTag = client.config.ERR_LOG.ERR_TAG;
                         const errEmbed = new MessageEmbed()
                         .setTitle("ERROR")
                         .setColor("RED")
@@ -445,7 +445,7 @@ module.exports = {
                             { name: "Channel", value: `<#${interaction.channel.id}>`},
                             { name: "Line", value: "Ticket Log Error (Unable to Save)"}
                         )
-                        client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+                        client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send({ content: `${errTag}`, embeds: [errEmbed] });
                     })
                     .then(function(urlToPaste) {
                         const embed = new client.discord.MessageEmbed()
@@ -454,14 +454,14 @@ module.exports = {
                             .setColor('2f3136')
                             .setTimestamp();
 
-                        client.channels.cache.get(client.config.logsTicket).send({
+                        client.channels.cache.get(client.config.REDM_TICKET.LOG.CHAN_ID).send({
                             embeds: [embed]
                         }).catch(err => {console.log(err)});
                         chan.send("Deleting the channel...");
 
                         setTimeout( () => chan.delete().catch(err => {
                             const commandName = "interactionCreateRedM.js";
-                            const errTag = client.config.errTag;
+                            const errTag = client.config.ERR_LOG.ERR_TAG;
                             const errEmbed = new MessageEmbed()
                             .setTitle("ERROR")
                             .setColor("RED")
@@ -472,13 +472,13 @@ module.exports = {
                                 { name: "Channel", value: `<#${interaction.channel.id}>`},
                                 { name: "Line", value: "Spamming"}
                             )
-                            client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+                            client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send({ content: `${errTag}`, embeds: [errEmbed] });
                         }),5000);
 
                         
                     }).catch(err => {
                         const commandName = "interactionCreateRedM.js";
-                        const errTag = client.config.errTag;
+                        const errTag = client.config.ERR_LOG.ERR_TAG;
                         const errEmbed = new MessageEmbed()
                         .setTitle("ERROR")
                         .setColor("RED")
@@ -489,13 +489,13 @@ module.exports = {
                             { name: "Channel", value: `<#${interaction.channel.id}>`},
                             { name: "Line", value: "HasteBin Error"}
                         )
-                        client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+                        client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send({ content: `${errTag}`, embeds: [errEmbed] });
                     });
             });
         };
     } catch(err){
         const commandName = "interactionCreateRedM.js";
-        const errTag = client.config.errTag;
+        const errTag = client.config.ERR_LOG.ERR_TAG;
         const errEmbed = new MessageEmbed()
         .setTitle("ERROR")
         .setColor("RED")
@@ -505,7 +505,7 @@ module.exports = {
             { name: "User", value: `<@!${interaction.user.id}>`},
             { name: "Channel", value: `<#${interaction.channel.id}>`}
         )
-        client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+        client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send({ content: `${errTag}`, embeds: [errEmbed] });
     }
     },
 };

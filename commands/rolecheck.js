@@ -20,7 +20,7 @@ module.exports = {
             { name: "Channel", value: `<#${interaction.channel.id}>`}
         )
         
-        client.channels.cache.get(client.config.errorLog).send({ embeds: [logEmbed]});
+        client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send({ embeds: [logEmbed]});
         
         try {
             if (interaction.user.id != owner_ID) {
@@ -32,8 +32,8 @@ module.exports = {
             }
 
             await interaction.guild.members.fetch();
-            const role1ID = require("../config.json").role1ID;
-            const role2ID = require("../config.json").role2ID;
+            const role1ID = client.config.ROLE_CHECK.ROLE_1.ID
+            const role2ID = client.config.ROLE_CHECK.ROLE_2.ID
             const role1 = interaction.guild.roles.cache.find(role => role.id == role1ID);
             const role2 = interaction.guild.roles.cache.find(role => role.id == role2ID);
             const totalrole1 = role1.members.map(m => m.user);
@@ -59,7 +59,7 @@ module.exports = {
             interaction.reply({ content: ` Common Role: ${NameID}`, ephemeral: true }).catch(err => console.log(err));
 
         } catch(err) {
-            const errTag = client.config.errTag;
+            const errTag = client.config.ERR_LOG.ERR_TAG;
             const errEmbed = new MessageEmbed()
             .setTitle("ERROR")
             .setColor("RED")
@@ -69,7 +69,7 @@ module.exports = {
                 { name: "User", value: `<@!${interaction.user.id}>`},
                 { name: "Channel", value: `<#${interaction.channel.id}>`}
             )
-            client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+            client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send({ content: `${errTag}`, embeds: [errEmbed] });
         }
         
     }

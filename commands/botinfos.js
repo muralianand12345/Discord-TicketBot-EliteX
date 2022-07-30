@@ -25,7 +25,7 @@ module.exports = {
             { name: "Channel", value: `<#${interaction.channel.id}>`}
         )
         
-        client.channels.cache.get(client.config.errorLog).send({ embeds: [logEmbed]});  
+        client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send({ embeds: [logEmbed]});  
         
         try {
             if (cooldown.has(interaction.user.id)) {
@@ -40,55 +40,54 @@ module.exports = {
                 .setURL("https://discord.gg/jPSbpsjb4r")
                 );
 
+                let days = Math.floor(client.uptime / 86400000);
+                let hours = Math.floor(client.uptime / 3600000) % 24;   
+                let minutes = Math.floor(client.uptime / 60000) % 60;  
+                let seconds = Math.floor(client.uptime / 1000) % 60;
+
                 let ram = ((process.memoryUsage().heapUsed / 1024 / 1024) + (process.memoryUsage().heapTotal / 1024 / 1024)).toFixed(2);
-                const duration1 = moment.duration(interaction.client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
-                const embed = new MessageEmbed();
-                embed.setColor('RANDOM');
-                embed.setAuthor(
-                    {
-                        name: client.user.username,
-                        icon_url: client.user.displayAvatarURL()
-                    }
-                )
-                embed.addFields(
-                    {
-                        name: 'Channels',
-                        value: `\`\`\`${client.channels.cache.size}\`\`\``,
-                        inline: true,
-                    },
-                    {
-                        name: 'Users',
-                        value: `\`\`\`${client.users.cache.size}\`\`\``,
-                        inline: true,
-                    },
-                    {
-                        name: 'Servers',
-                        value: `\`\`\`${client.guilds.cache.size}\`\`\``,
-                        //value: `\`\`\`1\`\`\``,
-                        inline: true,
-                    },
-                    {
-                        name: 'RAM usage',
-                        value: `\`\`\`${ram}MB\`\`\``,
-                        inline: true,
-                    },
-                    {
-                        name: 'Server OS',
-                        value: `\`\`\`Kali Linux\`\`\``,
-                        inline: true,
-                    },
-                    {
-                        name: 'API latency',
-                        value: `\`\`\`${client.ws.ping} ms\`\`\``,
-                        inline: true,
-                    },
-                    {
-                        name: 'Uptime',
-                        value: `\`\`\`${duration1}\`\`\``,
-                        inline: true,
-                    },
-                  
-                );
+    
+                const embed = new MessageEmbed()     
+                    .setAuthor({name: client.user.username, iconURL: client.user.displayAvatarURL()})
+                    .setColor("BLUE")
+                    .addFields(
+                        {
+                            name: 'Ping',
+                            value: `\`\`\`${client.ws.ping} ms\`\`\``,
+                            inline: true,
+                        },
+                        {
+                            name: 'Users',
+                            value: `\`\`\`${client.users.cache.size}\`\`\``,
+                            inline: true,
+                        },
+                        {
+                            name: 'Servers',
+                            value: `\`\`\`${client.guilds.cache.size}\`\`\``,
+                            inline: true,
+                        },
+                        {
+                            name: 'RAM Usage',
+                            value: `\`\`\`${ram}MB\`\`\``,
+                            inline: true,
+                        },
+                        {
+                            name: 'Server OS',
+                            value: `\`\`\`Kali Linux\`\`\``,
+                            inline: true,
+                        },
+                        {
+                            name: 'API latency',
+                            value: `\`\`\`${client.ws.ping} ms\`\`\``,
+                            inline: true,
+                        },
+                        {
+                            name: 'Uptime',
+                            value: `\`\`\`${days}d ${hours}h ${minutes}m ${seconds}s\`\`\``,
+                            inline: true,
+                        },
+                      
+                    )
 
                 interaction.reply({embeds: [embed], components: [row]});
 
@@ -99,7 +98,7 @@ module.exports = {
             }    
 
         } catch(err) {
-            const errTag = client.config.errTag;
+            const errTag = client.config.ERR_LOG.ERR_TAG;
             const errEmbed = new MessageEmbed()
             .setTitle("ERROR")
             .setColor("RED")
@@ -109,7 +108,7 @@ module.exports = {
                 { name: "User", value: `<@!${interaction.user.id}>`},
                 { name: "Channel", value: `<#${interaction.channel.id}>`}
             )
-            client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+            client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send({ content: `${errTag}`, embeds: [errEmbed] });
         }
         
     },

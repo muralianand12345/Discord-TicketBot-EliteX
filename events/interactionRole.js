@@ -1,5 +1,6 @@
-const Role1 = require("../config.json").Role1;
-const RoleID1 = require("../config.json").Role1ID;
+const config = require('../config.json');
+const Role = config.REDM_CHAN.ROLE;
+const RoleID = config.REDM_CHAN.ROLE_ID;
 const wait = require('util').promisify(setTimeout);
 const cooldown = new Set();
 const cooldownTime = 60000; 
@@ -9,7 +10,7 @@ module.exports = {
     name: 'interactionCreate',
     async execute(interaction, client) {
         try{
-            const errorLog = client.config.errorLog;
+            const errorLog = client.config.ERR_LOG.CHAN_ID;
             const errorSend = client.channels.cache.get(errorLog);
 
             const User = interaction.member;
@@ -21,8 +22,8 @@ module.exports = {
                     
                 } else {
     
-                    if ( User.roles.cache?.has(`${RoleID1}`)) {
-                        let role = interaction.guild.roles.cache.get(`${RoleID1}`);
+                    if ( User.roles.cache?.has(`${RoleID}`)) {
+                        let role = interaction.guild.roles.cache.get(`${RoleID}`);
                         
                         await interaction.reply({content: "`Getting Your Discord Name And Tag`",ephemeral: true});
                         await wait(1000);
@@ -30,7 +31,7 @@ module.exports = {
                         await wait(2000);
                         await interaction.editReply({content:"`Removing Role`",ephemeral: true});
                         await wait(1000);
-                        await interaction.editReply({content:`${Role1} **has been removed!**`, ephemeral: true});
+                        await interaction.editReply({content:`${Role} **has been removed!**`, ephemeral: true});
     
                         User.roles.remove(role).catch(err => {
                             const commandName = "interactionRole.js";
@@ -45,7 +46,7 @@ module.exports = {
                                 { name: "Channel", value: `<#${interaction.channel.id}>`},
                                 { name: "Line", value: "Unable to Remove Role!"}
                             )
-                            client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+                            client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send({ content: `${errTag}`, embeds: [errEmbed] });
                         });
 
                         const rmEmbed = new MessageEmbed()
@@ -53,12 +54,12 @@ module.exports = {
                             .setColor("BLACK")
                             .addFields(
                                 { name: "User", value: `<@!${interaction.user.id}>`},
-                                { name: "Removed", value: `${Role1}`}
+                                { name: "Removed", value: `${Role}`}
                             )
                         errorSend.send({ embeds: [rmEmbed]});
                         
                     } else {
-                        let role = interaction.guild.roles.cache.get(`${RoleID1}`);
+                        let role = interaction.guild.roles.cache.get(`${RoleID}`);
     
                         await interaction.reply({content: "`Getting Your Discord Name And Tag`",ephemeral: true});
                         await wait(1000);
@@ -66,11 +67,11 @@ module.exports = {
                         await wait(2000);
                         await interaction.editReply({content:"`Giving Role`",ephemeral: true});
                         await wait(1000);
-                        await interaction.editReply({content:`${Role1} **has been added!**`, ephemeral: true});
+                        await interaction.editReply({content:`${Role} **has been added!**`, ephemeral: true});
     
                         User.roles.add(role).catch(err => {
                             const commandName = "interactionRole.js";
-                            const errTag = client.config.errTag;
+                            const errTag = client.config.ERR_LOG.ERR_TAG;
                             const errEmbed = new MessageEmbed()
                             .setTitle("ERROR")
                             .setColor("RED")
@@ -81,14 +82,14 @@ module.exports = {
                                 { name: "Channel", value: `<#${interaction.channel.id}>`},
                                 { name: "Line", value: "Unable to Give Role!"}
                             )
-                            client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+                            client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send({ content: `${errTag}`, embeds: [errEmbed] });
                         });
                         const getEmbed = new MessageEmbed()
                             .setTitle("REDM ROLE")
                             .setColor("BLACK")
                             .addFields(
                                 { name: "User", value: `<@!${interaction.user.id}>`},
-                                { name: "Received", value: `${Role1}`}
+                                { name: "Received", value: `${Role}`}
                             )
                         errorSend.send({ embeds: [getEmbed]});
                     }
@@ -102,7 +103,7 @@ module.exports = {
                                                                  
         } catch(err) {
             const commandName = "interactionRole.js";
-            const errTag = client.config.errTag;
+            const errTag = client.config.ERR_LOG.ERR_TAG;
             const errEmbed = new MessageEmbed()
             .setTitle("ERROR")
             .setColor("RED")
@@ -112,7 +113,7 @@ module.exports = {
                 { name: "User", value: `<@!${interaction.user.id}>`},
                 { name: "Channel", value: `<#${interaction.channel.id}>`}
             )
-            client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+            client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send({ content: `${errTag}`, embeds: [errEmbed] });
         }
     }
 }

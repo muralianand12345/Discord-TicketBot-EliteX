@@ -3,17 +3,21 @@
     "@discordjs/builders": "^0.6.0",
     "@discordjs/rest": "^0.1.0-canary.0",
     "anilist-node": "^1.12.1",
+    "console": "^0.7.2",
     "discord-api-types": "^0.24.0",
     "discord.js": "^13.2.0",
     "dotenv": "^10.0.0",
+    "fivereborn-query": "^1.0.4",
     "hastebin": "^0.2.1",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
     "moment-timezone": "^0.5.34",
+    "mongoose": "^6.4.2",
     "node-fetch": "^2.6.6",
     "node-superfetch": "^0.2.3",
     "secure-env": "^1.2.0",
-    "systeminformation": "^5.11.2"
+    "systeminformation": "^5.11.2",
+    "weather-js": "^2.0.0"
   },
   "name": "ticket-bot",
   "version": "2.1.1",
@@ -33,7 +37,7 @@
     "url": "https://github.com/muralianand12345/Discord_TicketBot/issues"
   },
   "devDependencies": {
-    "node": "^16.13.2"
+    "node": "^18.5.0"
   },
   "keywords": []
 }

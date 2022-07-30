@@ -22,7 +22,7 @@ module.exports = {
             { name: "Channel", value: `<#${interaction.channel.id}>`}
         )
         
-        client.channels.cache.get(client.config.errorLog).send({ embeds: [logEmbed]});
+        client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send({ embeds: [logEmbed]});
 
         try {
             if (cooldown.has(interaction.user.id)) {
@@ -61,7 +61,7 @@ module.exports = {
 
                 collector.on('collect', async i => {
                     if (i.user.id !== interaction.user.id) {
-                        client.channels.cache.get(client.config.errorLog).send(`<@!${i.user.id}> Got RickRolled\nChannel: <#${i.channel.id}>`);
+                        client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send(`<@!${i.user.id}> Got RickRolled\nChannel: <#${i.channel.id}>`);
                         return i.reply({
                             content: `https://tenor.com/bEWOf.gif`,
                             ephemeral: true
@@ -92,7 +92,7 @@ module.exports = {
             }          
 
         } catch(err) {
-            const errTag = client.config.errTag;
+            const errTag = client.config.ERR_LOG.ERR_TAG;
             const errEmbed = new MessageEmbed()
             .setTitle("ERROR")
             .setColor("RED")
@@ -102,7 +102,7 @@ module.exports = {
                 { name: "User", value: `<@!${interaction.user.id}>`},
                 { name: "Channel", value: `<#${interaction.channel.id}>`}
             )
-            client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+            client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send({ content: `${errTag}`, embeds: [errEmbed] });
         }
         
     }

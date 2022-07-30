@@ -19,13 +19,6 @@ client.discord = Discord;
 //config
 client.config = config;
 
-//console read and print
-let console = process.openStdin()
-console.addListener("data", res => {
-    let info = res.toString().trim().split(/ +/g)
-    client.channels.cache.get(client.config.consoleChannel).send(info.join(" "));
-});
-
 //command file auto read
 client.commands = new Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -52,10 +45,10 @@ client.on('interactionCreate', async interaction => {
 
     try {
         await command.execute(interaction, client, config);
-    } catch (error) { //auto error 
-        console.error(error);
+    } catch(error) { //auto error 
+        global.console.log(error);
         return interaction.reply({
-            content: `An **ERROR** occured! Kindly Contact - ${client.config.errTag}`,
+            content: `An **ERROR** occured! Kindly Contact - ${client.config.ERR_LOG.ERR_TAG}`,
             ephemeral: true
         });
     };
@@ -64,7 +57,9 @@ client.on('interactionCreate', async interaction => {
 try{
     client.on('messageCreate', async message => {
         //ignore bots
-        if (message.author.bot) return;
+        if (message.author.bot) {
+            return;
+        };
 
         //reply when tagged
         const mention = new RegExp(`^<@!?${client.user.id}>( |)$`);
@@ -90,8 +85,8 @@ try{
 
     });
 } catch(err) {
-    const errTag = client.config.errTag;
-    const errChan = client.config.errorLog;
+    const errTag = client.config.ERR_LOG.ERR_TAG;
+    const errChan = client.config.ERR_LOG.CHAN_ID;
     const errorSend = client.channels.cache.get(errChan);
     errorSend.send(`**ERROR!** ${errTag} \n${err}\nCommand: \`Mention Reply\``);
 }

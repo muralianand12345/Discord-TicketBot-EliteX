@@ -26,7 +26,7 @@ module.exports = {
             { name: "Channel", value: `<#${interaction.channel.id}>`}
         )
         
-        client.channels.cache.get(client.config.errorLog).send({ embeds: [logEmbed]});
+        client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send({ embeds: [logEmbed]});
         
         const user = client.guilds.cache.get(interaction.guildId).members.cache.get(interaction.options.getUser('target').id);
         const executer = client.guilds.cache.get(interaction.guildId).members.cache.get(interaction.user.id);
@@ -60,7 +60,7 @@ module.exports = {
             };
 
         } catch(err) {
-            const errTag = client.config.errTag;
+            const errTag = client.config.ERR_LOG.ERR_TAG;
             const errEmbed = new MessageEmbed()
             .setTitle("ERROR")
             .setColor("RED")
@@ -70,7 +70,7 @@ module.exports = {
                 { name: "User", value: `<@!${interaction.user.id}>`},
                 { name: "Channel", value: `<#${interaction.channel.id}>`}
             )
-            client.channels.cache.get(client.config.errorLog).send({ content: `${errTag}`, embeds: [errEmbed] });
+            client.channels.cache.get(client.config.ERR_LOG.CHAN_ID).send({ content: `${errTag}`, embeds: [errEmbed] });
         }
 
         
