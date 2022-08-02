@@ -1,6 +1,27 @@
 {
     "ownerID": "678402714765361182",
     "consoleChannel": "",
+    
+    "ANNOUNCE": {
+        "GUILD_1": {
+            "METHOD": "ID",
+            "ID": "",
+            "ROLE": {
+                "NAME": "",
+                "ID": ""
+            },
+            "PERMS": "ADMINISTRATOR"
+        },
+        "GUILD_2": {
+            "METHOD": "PERMS",
+            "ID": "",
+            "ROLE": {
+                "NAME": "",
+                "ID": ""
+            },
+            "PERMS": "ADMINISTRATOR"
+        }
+    },
 
     "REDM_CHAN": {
         "CHAN_ID": "",
