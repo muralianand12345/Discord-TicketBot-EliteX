@@ -431,7 +431,7 @@ module.exports = {
                 if (a.length < 1) a = "Nothing"
                 hastebin.createPaste(a, {
                         contentType: 'text/plain',
-                        server: 'https://www.toptal.com/developers/hastebin/'
+                        server: 'https://hastebin.com/documents'
                     }, {}).catch(err => {
                         const commandName = "interactionCreateRedM.js";
                         const errTag = client.config.ERR_LOG.ERR_TAG;
