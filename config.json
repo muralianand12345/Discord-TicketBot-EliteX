@@ -2,6 +2,10 @@
     "ownerID": "678402714765361182",
     "consoleChannel": "",
     
+    "DARK_CHAT": {
+        "CHAN_ID": ""
+    },
+    
     "ANNOUNCE": {
         "GUILD_1": {
             "METHOD": "ID",
