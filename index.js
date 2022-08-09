@@ -1,16 +1,43 @@
 const fs = require('fs');
+require("dotenv").config();
 const {
     Client,
     Collection,
     Intents
 } = require('discord.js');
+const { REST } = require('@discordjs/rest');
+const { Routes } = require('discord-api-types/v9');
+const clientID = process.env.ClIENTID;
+const Token = process.env.TOKEN;
+
+//Slash commands 
+const slashcommands = [];
+const slashcommandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+for (const file of slashcommandFiles) {
+  const command = require(`./commands/${file}`);
+  slashcommands.push(command.data.toJSON());
+}
+
+const rest = new REST({
+  version: '9'
+}).setToken(Token);
+
+rest.put(Routes.applicationCommands(clientID), {
+    body: slashcommands
+  }).then(() => console.log('Successfully registered application commands.'))
+  .catch(console.error);
+  //console.log(`${slashcommands} Loaded to the Client`);
+  slashcommands.forEach( eachcommands => {
+    console.log(`${eachcommands.name} has been loaded`);
+  });
 
 //config file for channels and owner id
 const config = require('./config.json');
 
 
 const client = new Client({
-    intents: [Intents.FLAGS.DIRECT_MESSAGES,Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS],
+    intents: [Intents.FLAGS.DIRECT_MESSAGES,Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_PRESENCES],
 });
 
 //Discord
@@ -91,6 +118,4 @@ try{
     errorSend.send(`**ERROR!** ${errTag} \n${err}\nCommand: \`Mention Reply\``);
 }
 
-require("dotenv").config();
-const Token = process.env.TOKEN;
 client.login(Token);
