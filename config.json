@@ -6,6 +6,12 @@
         "CHAN_ID": ""
     },
     
+    "VOTE": {
+        "ROLE_ID": "",
+        "CHAN_ID": "",
+        "FILE_NAME": ""
+    },
+    
     "ANNOUNCE": {
         "GUILD_1": {
             "METHOD": "ID",
