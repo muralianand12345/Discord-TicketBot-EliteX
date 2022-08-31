@@ -8,7 +8,7 @@ module.exports = {
         const errorSend = client.channels.cache.get(errChan);
 
         if (!interaction.isButton()) return;
-        if (interaction.customId == "open-ticket-fivem") {
+        if (interaction.customId == "open-ticket-redm") {
 
             const InteID = BigInt(interaction.user.id) + BigInt(1);
 
@@ -17,7 +17,7 @@ module.exports = {
                     content: '**You have already created a ticket! Kindly Contact any \`Ticket Supporters\` if not!**',
                     ephemeral: true
                 }).catch(err => {
-                    const commandName = "interactionCreateFiveM.js";
+                    const commandName = "interactionCreateRedM.js";
                     const errTag = client.config.ERR_LOG.ERR_TAG;
                     const errEmbed = new MessageEmbed()
                     .setTitle("ERROR")
@@ -34,7 +34,7 @@ module.exports = {
 
                 const ticEmbed = new MessageEmbed()
                 .setColor("BLUE")
-                .setAuthor({ name: "FiveM"})
+                .setAuthor({ name: "RedM"})
                 .setDescription("Unable to open a new Ticket")
                 .addFields(
                     { name: 'User', value: `<@!${interaction.user.id}>`},
@@ -44,15 +44,15 @@ module.exports = {
                 return;
             };
 
-            interaction.guild.channels.create(`fivem-ticket-${interaction.user.username}`, {
-                parent: client.config.FIVEM_TICKET.MAIN,
+            interaction.guild.channels.create(`redm-ticket-${interaction.user.username}`, {
+                parent: client.config.REDM_TICKET.MAIN,
                 topic: InteID.toString(),
                 permissionOverwrites: [{
                         id: interaction.user.id,
                         allow: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
                     },
                     {
-                        id: client.config.FIVEM_TICKET.ROLE_SUPPORT.ID,
+                        id: client.config.REDM_TICKET.ROLE_SUPPORT.ID,
                         allow: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
                     },
                     {
@@ -66,7 +66,7 @@ module.exports = {
                     content: `Ticket created! <#${c.id}>`,
                     ephemeral: true
                 }).catch(err => {
-                    const commandName = "interactionCreateFiveM.js";
+                    const commandName = "interactionCreateRedM.js";
                     const errTag = client.config.ERR_LOG.ERR_TAG;
                     const errEmbed = new MessageEmbed()
                     .setTitle("ERROR")
@@ -142,7 +142,7 @@ module.exports = {
                     embeds: [embed],
                     components: [row]
                 }).catch(err => {
-                    const commandName = "interactionCreateFiveM.js";
+                    const commandName = "interactionCreateRedM.js";
                     const errTag = client.config.ERR_LOG.ERR_TAG;
                     const errEmbed = new MessageEmbed()
                     .setTitle("ERROR")
@@ -176,7 +176,7 @@ module.exports = {
                                 const row = new client.discord.MessageActionRow()
                                 .addComponents(
                                     new client.discord.MessageButton()
-                                    .setCustomId('close-ticket-fivem')
+                                    .setCustomId('close-ticket-redm')
                                     .setLabel('Close Ticket')
                                     .setEmoji('899745362137477181')
                                     .setStyle('DANGER'),
@@ -192,7 +192,7 @@ module.exports = {
                                     opened.channel.bulkDelete(1);
                                 });
                             }).catch(err => {
-                                const commandName = "interactionCreateFiveM.js";
+                                const commandName = "interactionCreateRedM.js";
                                 const errTag = client.config.ERR_LOG.ERR_TAG;
                                 const errEmbed = new MessageEmbed()
                                 .setTitle("ERROR")
@@ -210,42 +210,42 @@ module.exports = {
 
                         if (i.values[0] == 'Ooc') {
                             c.edit({
-                                parent: client.config.FIVEM_TICKET.OOC
+                                parent: client.config.REDM_TICKET.OOC
                             });
                         };
                         if (i.values[0] == 'CombatLogging') {
                             c.edit({
-                                parent: client.config.FIVEM_TICKET.CL
+                                parent: client.config.REDM_TICKET.CL
                             });
                         };
                         if (i.values[0] == 'Bugs') {
                             c.edit({
-                                parent: client.config.FIVEM_TICKET.BUG
+                                parent: client.config.REDM_TICKET.BUG
                             });
                         };
                         if (i.values[0] == 'Supporters') {
                             c.edit({
-                                parent: client.config.FIVEM_TICKET.SUPPORT
+                                parent: client.config.REDM_TICKET.SUPPORT
                             });
                         };
                         if (i.values[0] == 'Planned') {
                             c.edit({
-                                parent: client.config.FIVEM_TICKET.PLANNED
+                                parent: client.config.REDM_TICKET.PLANNED
                             });
                         };
                         if (i.values[0] == 'Character') {
                             c.edit({
-                                parent: client.config.FIVEM_TICKET.CHAR
+                                parent: client.config.REDM_TICKET.CHAR
                             });
                         };
                         if (i.values[0] == 'BanAppeal') {
                             c.edit({
-                                parent: client.config.FIVEM_TICKET.BAN
+                                parent: client.config.REDM_TICKET.BAN
                             });
                         };
                         if (i.values[0] == 'Others') {
                             c.edit({
-                                parent: client.config.FIVEM_TICKET.OTHER
+                                parent: client.config.REDM_TICKET.OTHER
                             });
                         };
                     };
@@ -259,7 +259,8 @@ module.exports = {
                                     c.delete();
                                 }
                             }, 5000);
-                        }).catch( err => {
+                        })
+                        .catch( err => {
                             const commandName = "interactionCreateFiveM.js";
                             const errTag = client.config.ERR_LOG.ERR_TAG;
                             const errEmbed = new MessageEmbed()
@@ -275,7 +276,7 @@ module.exports = {
 
                         const ticEmbed2 = new MessageEmbed()
                         .setColor("BLUE")
-                        .setAuthor({ name: "FIVEM"})
+                        .setAuthor({ name: "REDM"})
                         .setDescription("Menu Closed")
                         .addFields(
                             { name: 'User', value: `<@!${interaction.user.id}>`},
@@ -288,7 +289,7 @@ module.exports = {
         };
 
         try{
-            if (interaction.customId == "close-ticket-fivem") {
+            if (interaction.customId == "close-ticket-redm") {
                 const userButton = interaction.user.id;
                 const guild = client.guilds.cache.get(interaction.guildId);
                 const chan = guild.channels.cache.get(interaction.channelId);
@@ -296,11 +297,11 @@ module.exports = {
                 const row = new client.discord.MessageActionRow()
                 .addComponents(
                     new client.discord.MessageButton()
-                    .setCustomId('confirm-close-fivem')
+                    .setCustomId('confirm-close-redm')
                     .setLabel('Close ticket')
                     .setStyle('DANGER'),
                     new client.discord.MessageButton()
-                    .setCustomId('no-fivem')
+                    .setCustomId('no-redm')
                     .setLabel('Cancel closure')
                     .setStyle('SECONDARY'),
                 );
@@ -316,7 +317,7 @@ module.exports = {
                 });
 
                 collector.on('collect', i => {
-                    if (i.customId == 'confirm-close-fivem') {
+                    if (i.customId == 'confirm-close-redm') {
                         interaction.editReply({
                             content: `Ticket closed by <@!${i.user.id}>`,
                             components: []
@@ -327,14 +328,14 @@ module.exports = {
 
                         chan.edit({
                             name: `closed-${chan.name}`,
-                            parent: client.config.FIVEM_TICKET.CLOSED,
+                            parent: client.config.REDM_TICKET.CLOSED,
                             permissionOverwrites: [
                                 {
                                     id: client.users.cache.get(ChanTopic.toString()), //error
                                     deny: ['SEND_MESSAGES','VIEW_CHANNEL'],
                                 },
                                 {
-                                    id: client.config.FIVEM_TICKET.ROLE_SUPPORT.ID,
+                                    id: client.config.REDM_TICKET.ROLE_SUPPORT.ID,
                                     allow: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
                                 },
                                 {
@@ -344,7 +345,7 @@ module.exports = {
                             ],
                         })
                         .catch(err => {
-                            const commandName = "interactionCreateFiveM.js";
+                            const commandName = "interactionCreateRedM.js";
                             const errTag = client.config.ERR_LOG.ERR_TAG;
                             const errEmbed = new MessageEmbed()
                             .setTitle("ERROR")
@@ -369,7 +370,7 @@ module.exports = {
                             const row = new client.discord.MessageActionRow()
                             .addComponents(
                                 new client.discord.MessageButton()
-                                .setCustomId('delete-ticket-fivem')
+                                .setCustomId('delete-ticket-redm')
                                 .setLabel('Delete ticket')
                                 .setEmoji('🗑️')
                                 .setStyle('DANGER'),
@@ -380,7 +381,7 @@ module.exports = {
                                 components: [row]
                             })
                             .catch( err => {
-                                const commandName = "interactionCreateFiveM.js";
+                                const commandName = "interactionCreateRedM.js";
                                 const errTag = client.config.ERR_LOG.ERR_TAG;
                                 const errEmbed = new MessageEmbed()
                                 .setTitle("ERROR")
@@ -399,7 +400,7 @@ module.exports = {
                         collector.stop();
                     };
                      
-                    if (i.customId == 'no-fivem') {
+                    if (i.customId == 'no-redm') {
                         interaction.editReply({
                             content: `**Ticket closure cancelled!** (<@${i.user.id}>)`,
                             components: []
@@ -419,7 +420,7 @@ module.exports = {
                 });
             };
         } catch(err) {
-            const commandName = "interactionCreateFiveM.js";
+            const commandName = "interactionCreateRedM.js";
             const errTag = client.config.ERR_LOG.ERR_TAG;
             const errEmbed = new MessageEmbed()
             .setTitle("ERROR")
@@ -437,14 +438,14 @@ module.exports = {
 
         try{
 
-            if (interaction.customId == "delete-ticket-fivem") {
+            if (interaction.customId == "delete-ticket-redm") {
                 const guild = client.guilds.cache.get(interaction.guildId);
                 const chan = guild.channels.cache.get(interaction.channelId);
 
                 interaction.reply({
                     content: 'Saving Messages and Deleting the channel ...'
                 }).catch(err => {
-                    const commandName = "interactionCreateFiveM.js";
+                    const commandName = "interactionCreateRedM.js";
                     const errTag = client.config.ERR_LOG.ERR_TAG;
                     const errEmbed = new MessageEmbed()
                     .setTitle("ERROR")
@@ -473,7 +474,7 @@ module.exports = {
                         server: 'https://hastebin.com'
                     }, {})
                     .catch(err => {
-                        const commandName = "interactionCreateFiveM.js";
+                        const commandName = "interactionCreateRedM.js";
                         const errTag = client.config.ERR_LOG.ERR_TAG;
                         const errEmbed = new MessageEmbed()
                         .setTitle("ERROR")
@@ -494,10 +495,10 @@ module.exports = {
                         .setColor('2f3136')
                         .setTimestamp();
 
-                        client.channels.cache.get(client.config.FIVEM_TICKET.LOG.CHAN_ID).send({
+                        client.channels.cache.get(client.config.REDM_TICKET.LOG.CHAN_ID).send({
                             embeds: [embed]
                         }).catch(err => {
-                            const commandName = "interactionCreateFiveM.js";
+                            const commandName = "interactionCreateRedM.js";
                             const errTag = client.config.ERR_LOG.ERR_TAG;
                             const errEmbed = new MessageEmbed()
                             .setTitle("ERROR")
@@ -511,7 +512,7 @@ module.exports = {
                         });
 
                         setTimeout( () => chan.delete().catch(err => {
-                            const commandName = "interactionCreateFiveM.js";
+                            const commandName = "interactionCreateRedM.js";
                             const errTag = client.config.ERR_LOG.ERR_TAG;
                             const errEmbed = new MessageEmbed()
                             .setTitle("ERROR")
@@ -527,7 +528,7 @@ module.exports = {
                         
                     })
                     .catch(err => {
-                        const commandName = "interactionCreateFiveM.js";
+                        const commandName = "interactionCreateRedM.js";
                         const errTag = client.config.ERR_LOG.ERR_TAG;
                         const errEmbed = new MessageEmbed()
                         .setTitle("ERROR")
@@ -544,7 +545,7 @@ module.exports = {
                 });
             };
         } catch(err){
-            const commandName = "interactionCreateFiveM.js";
+            const commandName = "interactionCreateRedM.js";
             const errTag = client.config.ERR_LOG.ERR_TAG;
             const errEmbed = new MessageEmbed()
             .setTitle("ERROR")
