@@ -1,6 +1,18 @@
 ## Discord_TicketBot
 - Advanced Ticket Bot | Discordjs@13 | slash command | components | interactions
 
+---------------------------------------------
+
+## Updated Discord Bot Code
+
+https://github.com/muralianand12345/Discord-Ticket-Bot
+
+- DiscordJs V14
+- Bug Fix
+- Enhancements and Performance Improvement 
+
+---------------------------------------------
+
 ## ENV
 - TOKEN= `Your beautiful discord bot`
 
