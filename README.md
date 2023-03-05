@@ -37,6 +37,4 @@ https://github.com/muralianand12345/Discord-Ticket-Bot
 ## Any Queries 
 
 - ! Murali Anand#5615
-- :)
 - Note: This Bot uses HastBin For Text Logs
-
